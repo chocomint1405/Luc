@@ -19,7 +19,7 @@ import {
 
 export default function About() {
   return (
-    <div className="bg-slate-50">
+    <div className="bg-slate-50 dark:bg-slate-900">
       {/* Hero Section */}
       <header className="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
@@ -30,10 +30,10 @@ export default function About() {
           >
             <span className="inline-block py-1 px-3 rounded-full bg-sky-100 text-sky-600 text-xs font-bold uppercase tracking-wider mb-6">Medical Awareness Project</span>
             <h1 className="text-5xl lg:text-7xl font-black leading-tight mb-8 text-slate-900">
-              Understanding <span className="text-sky-500">Nuclear Medicine</span>
+              <span className="text-slate-900 dark:text-white">Understanding</span> <span className="text-sky-500">Nuclear Medicine</span>
             </h1>
             <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
-              A deep dive into the science that sees within. Discover how molecular imaging and targeted therapies are revolutionizing modern healthcare.
+              <span className="text-slate-600 dark:text-slate-200">A deep dive into the science that sees within. Discover how molecular imaging and targeted therapies are revolutionizing modern healthcare.</span>
             </p>
             <div className="flex gap-4">
               <button className="bg-sky-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-sky-200">Get Started</button>

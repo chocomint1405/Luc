@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { Moon, Sun } from 'lucide-react';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -17,14 +18,13 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-sky-100 px-4 md:px-10 lg:px-20 py-4 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900 backdrop-blur-md border-b border-sky-100 px-4 md:px-10 lg:px-20 py-4 flex items-center justify-between">
       <Link to="/" className="flex items-center gap-2">
         <div className="bg-sky-500 text-white p-1.5 rounded-lg flex items-center justify-center">
           <BubbleChart size={24} />
         </div>
-        <h1 className="text-2xl font-black tracking-tighter text-slate-900 uppercase italic">NucleUS</h1>
+        <h1 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white uppercase italic">NucleUS</h1>
       </Link>
-      
       <div className="hidden md:flex items-center gap-10">
         {navLinks.map((link) => (
           <Link
@@ -32,19 +32,14 @@ export default function Navbar() {
             to={link.path}
             className={cn(
               "text-sm font-semibold transition-colors hover:text-sky-500",
-              location.pathname === link.path ? "text-sky-500" : "text-slate-600"
+              location.pathname === link.path ? "text-sky-500 dark:text-sky-300" : "text-slate-600 dark:text-slate-200"
             )}
           >
             {link.name}
           </Link>
         ))}
       </div>
-
-      <div className="flex items-center gap-4">
-        <button className="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-sky-200">
-          Get Started
-        </button>
-      </div>
+        {/* ...existing code... */}
     </nav>
   );
 }

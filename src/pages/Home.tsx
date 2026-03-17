@@ -20,7 +20,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="bg-slate-50">
+    <div className="bg-slate-50 dark:bg-slate-900">
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-32 px-4 md:px-10 lg:px-20">
         <div className="absolute inset-0 atomic-pattern -z-10 opacity-50"></div>

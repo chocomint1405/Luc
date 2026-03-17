@@ -13,8 +13,7 @@ import {
   Pill,
   ShieldCheck,
   Target,
-  Moon,
-  Sun
+  // ...existing code...
 } from 'lucide-react';
 
 export default function About() {

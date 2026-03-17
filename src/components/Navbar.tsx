@@ -26,18 +26,19 @@ export default function Navbar() {
         <h1 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white uppercase italic">NucleUS</h1>
       </Link>
       <div className="hidden md:flex items-center gap-10">
-        {navLinks.map((link) => (
-          <Link
-            key={link.name}
-            to={link.path}
-            className={cn(
-              "text-sm font-semibold transition-colors hover:text-sky-500",
-              location.pathname === link.path ? "text-sky-500 dark:text-sky-300" : "text-slate-600 dark:text-slate-200"
-            )}
-          >
-            {link.name}
-          </Link>
-        ))}
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              to={link.path}
+              className={cn(
+                "text-sm font-semibold transition-colors hover:text-sky-500 px-4 py-2 rounded-xl border border-sky-200 bg-white/60 dark:bg-slate-800 shadow-sm",
+                location.pathname === link.path ? "text-sky-500 dark:text-sky-300 border-sky-500" : "text-slate-600 dark:text-slate-200"
+              )}
+              style={{ minWidth: '90px', textAlign: 'center' }}
+            >
+              {link.name}
+            </Link>
+          ))}
       </div>
         {/* ...existing code... */}
     </nav>

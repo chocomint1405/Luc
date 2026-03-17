@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { Moon, Sun } from 'lucide-react';
+// ...existing code...
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

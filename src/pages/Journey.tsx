@@ -28,9 +28,10 @@ export default function Journey() {
             animate={{ opacity: 1, y: 0 }}
             className="font-serif italic text-2xl text-sky-400 mb-6"
           >
-            Chapter 1: The Human Journey
+
           </motion.h4>
           <motion.h1 
+
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
@@ -81,11 +82,15 @@ export default function Journey() {
             <div className="absolute left-1/2 -translate-x-1/2 w-12 h-12 bg-slate-950 border-2 border-sky-500 rounded-full flex items-center justify-center z-10 hidden md:flex">
               <Droplets size={20} className="text-sky-500" />
             </div>
-            <div className="w-full md:w-1/2">
-              <div className="aspect-square rounded-[3rem] bg-slate-900/50 border-2 border-dashed border-sky-500/30 flex items-center justify-center">
-                <div className="w-32 h-32 bg-sky-500/20 rounded-full blur-2xl animate-pulse"></div>
-              </div>
-            </div>
+                <div className="w-full md:w-1/2">
+                  <div className="aspect-square rounded-[3rem] overflow-hidden border-2 border-dashed border-sky-500/30">
+                    <img 
+                      src="https://drive.google.com/uc?export=view&id=1twNwAbAaYC1CmcC4DZuVuf808DoNw7lo" 
+                      alt="mô tả ảnh ủa chưa"
+                        className="w-full h-full object-cover"
+                   />
+                  </div>
+                </div>
           </div>
 
           {/* Step 2 */}

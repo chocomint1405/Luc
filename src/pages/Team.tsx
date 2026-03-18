@@ -13,7 +13,7 @@ export default function Team() {
     <div className="bg-slate-50 dark:bg-slate-900 py-24 px-4 md:px-10 lg:px-20 min-h-[calc(100vh-128px)]">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-10">
-          <p className="text-sky-500 uppercase text-xs tracking-[0.35em] mb-2">oUR TEAM</p>
+          <p className="text-sky-500 uppercase text-xs tracking-[0.35em] mb-2"> TEAM</p>
           <h1 className="text-4xl md:text-5xl font-black text-slate-900">The NucleUS Team</h1>
           <p className="mt-3 text-slate-600 max-w-2xl mx-auto">A dedicated multidisciplinary team building accessible nuclear medicine education and solutions.</p>
         </div>

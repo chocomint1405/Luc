@@ -58,7 +58,7 @@ export default function Footer() {
       </div>
       
       <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium">
-        <p>© 2024 NucleUS Project. Developed for Global Health Hackathon.</p>
+        <p>© 2026 NucleUS Project. Developed for Global Health Hackathon.</p>
         <p className="flex items-center gap-2">
           Designed with <Heart size={14} className="text-red-500" /> for Humanity.
         </p>

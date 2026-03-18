@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 // ...existing code...
@@ -9,13 +9,23 @@ function cn(...inputs: ClassValue[]) {
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navLinks = [
     { name: 'About', path: '/about' },
     { name: 'Stories', path: '/journey' },
-    { name: 'News', path: '/#news' },
-    { name: 'Team', path: '/#team' },
+    { name: 'Research', path: '/' },
+    { name: ' Our Team', path: '/team' },
   ];
+
+  function isActive(link: { path: string }) {
+    return location.pathname === link.path;
+  }
+
+  const handleNavClick = (link: { path: string }) => {
+    navigate(link.path);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900 backdrop-blur-md border-b border-sky-100 px-4 md:px-10 lg:px-20 py-4 flex items-center justify-between">
@@ -27,17 +37,17 @@ export default function Navbar() {
       </Link>
       <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
-            <Link
+            <button
               key={link.name}
-              to={link.path}
+              onClick={() => handleNavClick(link)}
               className={cn(
                 "text-sm font-semibold transition-colors hover:text-sky-500 px-4 py-2 rounded-xl border border-sky-200 bg-white/60 dark:bg-slate-800 shadow-sm",
-                location.pathname === link.path ? "text-sky-500 dark:text-sky-300 border-sky-500" : "text-slate-600 dark:text-slate-200"
+                isActive(link) ? "text-sky-500 dark:text-sky-300 border-sky-500" : "text-slate-600 dark:text-slate-200"
               )}
               style={{ minWidth: '90px', textAlign: 'center' }}
             >
               {link.name}
-            </Link>
+            </button>
           ))}
       </div>
         {/* ...existing code... */}

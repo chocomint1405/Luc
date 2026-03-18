@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { 
   ArrowRight, 
@@ -19,6 +21,17 @@ import {
 } from 'lucide-react';
 
 export default function Home() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const target = document.querySelector(location.hash);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [location.hash]);
+
   return (
     <div className="bg-slate-50 dark:bg-slate-900">
       {/* Hero Section */}
@@ -276,43 +289,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section id="team" className="py-24 bg-sky-50 px-4 md:px-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4 text-slate-900">The NucleUS Team</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-            {[
-              { name: 'Vương Uy Lực', role: 'Leader', img: 'https://picsum.photos/seed/chibi-luc/200/200' },
-              { name: 'Lê Tuấn Anh', role: 'Medical Advisor', img: 'https://picsum.photos/seed/chibi-anh/200/200' },
-              { name: 'Nguyễn Văn Thiêm', role: 'Web designer', img: 'https://picsum.photos/seed/chibi-thiem/200/200' },
-              { name: 'Minh Thành', role: 'Content designer', img: 'https://picsum.photos/seed/chibi-thanh/200/200' },
-              { name: 'Ngô Đạt', role: 'Web designer', img: 'https://picsum.photos/seed/chibi-dat/200/200' }
-            ].map((member, i) => (
-              <div key={i} className="flex flex-col items-center group">
-                <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-white mb-4 group-hover:scale-110 transition-transform shadow-md">
-                  <img alt={member.name} className="w-full h-full object-cover" src={member.img} referrerPolicy="no-referrer" />
-                </div>
-                <h6 className="font-bold text-slate-900 text-center text-sm">{member.name}</h6>
-                <p className="text-[10px] text-sky-500 font-semibold text-center">{member.role}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-20 p-8 rounded-3xl bg-white border-2 border-dashed border-sky-200 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-center gap-6">
-              <div className="bg-sky-100 p-4 rounded-2xl">
-                <Trophy size={32} className="text-sky-500" />
-              </div>
-              <div>
-                <h4 className="font-bold text-xl text-slate-900">Hackathon Mention</h4>
-                <p className="text-slate-500 text-sm">Recognized for Excellence in Public Awareness at the 2024 Tech-Med Challenge.</p>
-              </div>
-            </div>
-            <button className="bg-slate-900 text-white px-8 py-3 rounded-xl text-sm font-bold shrink-0 hover:bg-slate-800 transition-colors">Learn More About the Hackathon</button>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

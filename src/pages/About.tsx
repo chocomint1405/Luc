@@ -78,7 +78,7 @@ export default function About() {
             </div>
             <div className="lg:col-span-2 grid md:grid-cols-2 gap-6">
               <div className="p-8 rounded-2xl bg-sky-50 border border-sky-100 flex flex-col gap-4">
-                <FlaskConical size={40} className="text-sky-500" />
+                <FlaskConical size={30} className="text-sky-500" />
                 <h3 className="text-xl font-bold text-slate-900">Radiopharmaceuticals</h3>
                 <p className="text-sm text-slate-500">Compounds that combine a radioactive isotope with a biological molecule to target specific organs or cells.</p>
               </div>

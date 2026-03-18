@@ -60,15 +60,7 @@ export default function About() {
         </div>
       </header>
       <div className="flex gap-4">
-  <button
-    onClick={() => {
-      const section = document.getElementById("nuclear-medicine");
-      section?.scrollIntoView({ behavior: "smooth" });
-    }}
-    className="bg-sky-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-sky-200"
-  >
-    Get Started
-  </button>
+ 
 </div>
 
       {/* What is Nuclear Medicine */}

@@ -36,7 +36,7 @@ export default function About() {
             </p>
             <div className="flex gap-4">
               <button className="bg-sky-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-sky-200">Get Started</button>
-              <button className="border border-slate-300 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-50 transition-colors">View Studies</button>
+
                 {/* Theme toggle button removed */}
             </div>
           </motion.div>
@@ -59,6 +59,17 @@ export default function About() {
           </motion.div>
         </div>
       </header>
+      <div className="flex gap-4">
+  <button
+    onClick={() => {
+      const section = document.getElementById("nuclear-medicine");
+      section?.scrollIntoView({ behavior: "smooth" });
+    }}
+    className="bg-sky-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-sky-200"
+  >
+    Get Started
+  </button>
+</div>
 
       {/* What is Nuclear Medicine */}
       <section className="py-24 bg-white">

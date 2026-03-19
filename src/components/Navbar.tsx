@@ -14,8 +14,8 @@ export default function Navbar() {
   const navLinks = [
     { name: 'About', path: '/about' },
     { name: 'Stories', path: '/journey' },
-    { name: 'Research', path: '/' },
-    { name: ' Our Team', path: '/team' },
+    { name: 'News', path: '/home' },
+    { name: 'Our Team', path: '/team' },
   ];
 
   function isActive(link: { path: string }) {

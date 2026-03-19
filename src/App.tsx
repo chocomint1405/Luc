@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -11,7 +11,6 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Journey from './pages/Journey';
 import Team from './pages/Team';
-
 function ScrollToHash() {
   const location = useLocation();
 
@@ -35,9 +34,10 @@ export default function App() {
         <ScrollToHash />
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/" element={<Navigate to="/journey" />} />
+            <Route path="/about" element={<About/>} />
             <Route path="/journey" element={<Journey />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/team" element={<Team />} />
           </Routes>
         </main>

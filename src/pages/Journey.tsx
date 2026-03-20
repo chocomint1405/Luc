@@ -223,7 +223,7 @@ export default function Journey() {
 
 {/* Slide 4 */}
       <section 
-        ref={(el) => (sectionsRef.current[3] = el)} 
+        ref={(el) => (sectionsRef.current[4] = el)} 
         className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -279,7 +279,7 @@ export default function Journey() {
       </section>
 {/* Slide 5 */}
       <section 
-        ref={(el) => (sectionsRef.current[4] = el)} 
+        ref={(el) => (sectionsRef.current[5] = el)} 
         className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -323,7 +323,7 @@ export default function Journey() {
 
 {/* Slide 6 */}
       <section 
-        ref={(el) => (sectionsRef.current[4] = el)} 
+        ref={(el) => (sectionsRef.current[6] = el)} 
         className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -366,7 +366,7 @@ export default function Journey() {
       </section>
 {/* Slide 7 */}
       <section 
-          ref={(el) => (sectionsRef.current[1] = el)} 
+          ref={(el) => (sectionsRef.current[7] = el)} 
           className="h-screen flex items-center"  
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -396,7 +396,7 @@ export default function Journey() {
       </section>
 {/* Slide 8 */}
       <section 
-          ref={(el) => (sectionsRef.current[2] = el)} 
+          ref={(el) => (sectionsRef.current[8] = el)} 
           className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -427,7 +427,7 @@ export default function Journey() {
 </section>
 {/* Slide 9 */}
       <section 
-          ref={(el) => (sectionsRef.current[1] = el)} 
+          ref={(el) => (sectionsRef.current[9] = el)} 
           className="h-screen flex items-center"  
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -457,7 +457,7 @@ export default function Journey() {
       </section>
 {/* Slide 10 */}
      <section 
-        ref={(el) => (sectionsRef.current[2] = el)} 
+        ref={(el) => (sectionsRef.current[10] = el)} 
         className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -488,7 +488,7 @@ export default function Journey() {
       </section>
 {/* Slide 11 */}
       <section 
-          ref={(el) => (sectionsRef.current[1] = el)} 
+          ref={(el) => (sectionsRef.current[11] = el)} 
           className="h-screen flex items-center"  
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -518,7 +518,7 @@ export default function Journey() {
       </section>
 {/* Step 12 */}
       <section 
-        ref={(el) => (sectionsRef.current[2] = el)} 
+        ref={(el) => (sectionsRef.current[12] = el)} 
         className="h-screen flex items-center"  
       >       
         <div className="relative flex flex-row w-full h-full items-center">

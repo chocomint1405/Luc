@@ -13,20 +13,48 @@ import {
 } from 'lucide-react';
 import { useRef, useState, useEffect } from "react";
 
+function TypewriterText({ lines, totalDuration, isVisible }) {
+  const [displayed, setDisplayed] = useState("");
+  const fullText = lines.join("\n");
+  const charTime = totalDuration / fullText.length;
+
+  useEffect(() => {
+    if (!isVisible) return; // chỉ chạy khi visible
+    
+    let i = 0;
+    setDisplayed(""); // reset lại
+    const interval = setInterval(() => {
+      i++;
+      setDisplayed(fullText.slice(0, i));
+      if (i >= fullText.length) clearInterval(interval);
+    }, charTime);
+    return () => clearInterval(interval);
+  }, [isVisible]); // chạy lại khi isVisible thay đổi
+
+  return (
+    <pre className="text-white font-black text-5xl tracking-tighter whitespace-pre-wrap text-center">
+      {displayed.split("\n").map((line, index) => (
+        <div key={index} className={index === 0 ? "text-sky-400 font-serif italic font-bold text-6xl mb-4 block tracking-widest" : "text-8xl font-black mb-6 tracking-wide"}>
+          {line}
+        </div>
+      ))}
+    </pre>
+  );
+}
 
 export default function Journey() {
   const sectionsRef = useRef([]);
   const [current, setCurrent] = useState(0);
+  const [chapterVisible, setChapterVisible] = useState(false);
 
   const scrollToSection = (index) => {
-    if (index < 0 || index >= sectionsRef.current.length) return;
-
-    sectionsRef.current[index].scrollIntoView({
-      behavior: "smooth",
-    });
-
-    setCurrent(index);
-  };
+  if (index < 0 || index >= sectionsRef.current.length) return;
+  sectionsRef.current[index].scrollIntoView({ behavior: "smooth" });
+  setCurrent(index);
+  
+  if (index === 1) setChapterVisible(true); // index 1 là Chapter section
+  else setChapterVisible(false); // reset khi rời đi
+};
 
   const handleNext = () => scrollToSection(current + 1);
   const handlePrev = () => scrollToSection(current - 1);
@@ -57,11 +85,24 @@ export default function Journey() {
       <section 
         ref={(el) => (sectionsRef.current[0] = el)} 
         className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Trong Hero Section, thêm vào trước div gradient */}
+<div className="absolute inset-0 z-0">
+  <img 
+    src="https://www.hhrinstitute.org/wp-content/uploads/Research.jpeg" 
+    
+    alt="..."
+    className="w-full h-full object-cover"
+    style={{
+      animation: "fadeInOut 11s infinite"
+    }}
+  />
+  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent z-[1]"></div>
+</div>
         <div className="absolute inset-0 bg-gradient-to-b from-sky-500/10 to-transparent"></div>
         <div className="absolute inset-0 flex items-center justify-center opacity-20">
-          <div className="w-[800px] h-[800px] border-6 border-sky-500/30 rounded-full animate-pulse"></div>
-          <div className="absolute w-[600px] h-[600px] border-6 border-sky-500/20 rounded-full animate-pulse delay-700"></div>
-          <div className="absolute w-[400px] h-[400px] border-6 border-sky-500/10 rounded-full animate-pulse delay-1000"></div>
+          <div className="w-[800px] h-[800px] border-6 border-white/30 rounded-full animate-pulse"></div>
+          <div className="absolute w-[600px] h-[600px] border-6 border-white/20 rounded-full animate-pulse delay-700"></div>
+          <div className="absolute w-[400px] h-[400px] border-6 border-white/10 rounded-full animate-pulse delay-1000"></div>
         </div>
         
         <div className="relative z-10 text-center px-4 -translate-y-20">
@@ -102,10 +143,25 @@ export default function Journey() {
           </motion.div>
       </section>
 
+{/* Chapter Intro */}
+<section
+  ref={(el) => (sectionsRef.current[1] = el)}
+  className="h-screen flex items-center justify-center bg-slate-950"
+  
+>
+  <div className="text-center">
+    <TypewriterText 
+  lines={["Chapter 1", "The Introduction"]} 
+  totalDuration={5000}
+  isVisible={chapterVisible}
+/>
+  </div>
+</section>
+
       {/* Timeline Section */}
   {/*Slide 1*/}
       <section 
-          ref={(el) => (sectionsRef.current[1] = el)} 
+          ref={(el) => (sectionsRef.current[2] = el)} 
           className="h-screen flex items-center"  
       >       
       <div className="relative flex flex-row w-full h-full items-center">
@@ -125,9 +181,9 @@ export default function Journey() {
         <div className="w-1/2 h-[80vh] pr-8">
           <div className="rounded-[3rem] overflow-hidden w-full h-full">
             <img 
-              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
+              src="Stories\Image1.png" 
               alt="..."
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
         </div>
@@ -136,7 +192,7 @@ export default function Journey() {
 
 {/* Slide 2 */}
       <section 
-          ref={(el) => (sectionsRef.current[2] = el)} 
+          ref={(el) => (sectionsRef.current[3] = el)} 
           className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -145,9 +201,9 @@ export default function Journey() {
         <div className="w-1/2 h-[80vh] pl-8">
           <div className="rounded-[3rem] overflow-hidden w-full h-full">
             <img 
-              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
+              src="Stories\Image2.png" 
               alt="..."
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
         </div>
@@ -165,10 +221,105 @@ export default function Journey() {
 
         </div>
       </section>
-      
+
 {/* Slide 3 */}
       <section 
-          ref={(el) => (sectionsRef.current[3] = el)} 
+          ref={(el) => (sectionsRef.current[4] = el)} 
+          className="h-screen flex items-center"  
+      >       
+        <div className="relative flex flex-row w-full h-full items-center">
+    
+          {/* Nửa trái - Text */}
+          <div className="w-1/2 flex items-center justify-center px-16">
+            <div>
+              <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part III</span>
+                <h3 className="text-4xl font-black mb-6">The stories Title 3</h3>
+                  <p className="text-slate-400 leading-relaxed italic">
+                    The stories context 3
+                  </p>
+            </div>
+          </div>
+
+        {/* Nửa phải - Ảnh sát mép */}
+        <div className="w-1/2 h-[80vh] pr-8">
+          <div className="rounded-[3rem] overflow-hidden w-full h-full">
+            <img 
+              src="Stories\Image3.png" 
+              alt="..."
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+      </div>
+      </section>
+
+
+{/* Slide 4 */}
+      <section 
+          ref={(el) => (sectionsRef.current[5] = el)} 
+          className="h-screen flex items-center"
+      >       
+        <div className="relative flex flex-row w-full h-full items-center">
+    
+        {/* Nửa trái - Ảnh sát mép */}
+        <div className="w-1/2 h-[80vh] pl-8">
+          <div className="rounded-[3rem] overflow-hidden w-full h-full">
+            <img 
+              src="Stories\Image 4.png" 
+              alt="..."
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+
+        {/* Nửa phải - Text */}
+        <div className="w-1/2 flex items-center justify-center px-16">
+          <div>
+            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part IV</span>
+            <h3 className="text-4xl font-black mb-6">The stories Title 4</h3>
+            <p className="text-slate-400 leading-relaxed italic">
+              The stories context 4
+            </p>
+          </div>
+        </div>
+
+        </div>
+      </section>
+
+  {/*Slide 5*/}
+      <section 
+          ref={(el) => (sectionsRef.current[6] = el)} 
+          className="h-screen flex items-center"  
+      >       
+      <div className="relative flex flex-row w-full h-full items-center">
+    
+        {/* Nửa trái - Text */}
+        <div className="w-1/2 flex items-center justify-center px-16">
+          <div>
+            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part V</span>
+              <h3 className="text-4xl font-black mb-6">The stories Title 5</h3>
+                <p className="text-slate-400 leading-relaxed italic">
+          The stories context 5
+                </p>
+          </div>
+        </div>
+
+        {/* Nửa phải - Ảnh sát mép */}
+        <div className="w-1/2 h-[80vh] pr-8">
+          <div className="rounded-[3rem] overflow-hidden w-full h-full">
+            <img 
+              src="Stories\Image5.png" 
+              alt="..."
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+      </div>
+      </section>
+
+{/* Slide 6 */}
+      <section 
+          ref={(el) => (sectionsRef.current[7] = el)} 
           className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -176,10 +327,10 @@ export default function Journey() {
         {/* Nửa trái - Text */}
         <div className="w-1/2 flex items-center justify-center px-16">
           <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part III</span>
-            <h3 className="text-4xl font-black mb-6">The stories Title 3</h3>
+            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part VI</span>
+            <h3 className="text-4xl font-black mb-6">The stories Title 6</h3>
             <p className="text-slate-400 leading-relaxed italic">
-              The stories context 3
+              The stories context 6
             </p>
           </div>
         </div>
@@ -223,9 +374,10 @@ export default function Journey() {
         </div>
       </section>
 
-{/* Slide 4 */}
+
+{/* Slide 7 */}
       <section 
-        ref={(el) => (sectionsRef.current[4] = el)} 
+        ref={(el) => (sectionsRef.current[8] = el)} 
         className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -269,19 +421,19 @@ export default function Journey() {
         {/* Nửa phải - Text */}
         <div className="w-1/2 flex items-center justify-center px-16">
           <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part IV</span>
-            <h3 className="text-4xl font-black mb-6">The stories Title 4</h3>
+            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part VII</span>
+            <h3 className="text-4xl font-black mb-6">The stories Title 7</h3>
             <p className="text-slate-400 leading-relaxed italic">
-              The stories context 4
+              The stories context 7
             </p>
           </div>
         </div>
 
         </div>
       </section>
-{/* Slide 5 */}
+{/* Slide 8 */}
       <section 
-        ref={(el) => (sectionsRef.current[5] = el)} 
+        ref={(el) => (sectionsRef.current[9] = el)} 
         className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -289,10 +441,10 @@ export default function Journey() {
         {/* Nửa trái - Text */}
         <div className="w-1/2 flex items-center justify-center px-16">
           <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part V</span>
-            <h3 className="text-4xl font-black mb-6">The stories Title 5</h3>
+            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part VIII</span>
+            <h3 className="text-4xl font-black mb-6">The stories Title 8</h3>
             <p className="text-slate-400 leading-relaxed italic">
-              The stories context 5
+              The stories context 8
             </p>
           </div>
         </div>
@@ -323,9 +475,9 @@ export default function Journey() {
   </div>
 </section>
 
-{/* Slide 6 */}
+{/* Slide 9 */}
       <section 
-        ref={(el) => (sectionsRef.current[6] = el)} 
+        ref={(el) => (sectionsRef.current[10] = el)} 
         className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
@@ -356,111 +508,21 @@ export default function Journey() {
     {/* Nửa phải - Text */}
     <div className="w-1/2 flex items-center justify-center px-16">
       <div>
-        <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part VI</span>
-        <h3 className="text-4xl font-black mb-6">The stories Title 6</h3>
+        <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part IX</span>
+        <h3 className="text-4xl font-black mb-6">The stories Title 9</h3>
         <p className="text-slate-400 leading-relaxed italic">
-          The stories context 6
+          The stories context 9
         </p>
       </div>
     </div>
 
   </div>
       </section>
-{/* Slide 7 */}
-      <section 
-          ref={(el) => (sectionsRef.current[7] = el)} 
-          className="h-screen flex items-center"  
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
-    
-          {/* Nửa trái - Text */}
-          <div className="w-1/2 flex items-center justify-center px-16">
-            <div>
-              <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part VII</span>
-                <h3 className="text-4xl font-black mb-6">The stories Title 7</h3>
-                  <p className="text-slate-400 leading-relaxed italic">
-                    The stories context 7
-                  </p>
-            </div>
-          </div>
 
-        {/* Nửa phải - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pr-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
-            <img 
-              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
-              alt="..."
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
-      </section>
-{/* Slide 8 */}
-      <section 
-          ref={(el) => (sectionsRef.current[8] = el)} 
-          className="h-screen flex items-center"
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
-    
-        {/* Nửa trái - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pl-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
-            <img 
-              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
-              alt="..."
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-
-    {/* Nửa phải - Text */}
-    <div className="w-1/2 flex items-center justify-center px-16">
-      <div>
-        <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part VIII</span>
-        <h3 className="text-4xl font-black mb-6">The stories Title 8</h3>
-        <p className="text-slate-400 leading-relaxed italic">
-          The stories context 8
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-{/* Slide 9 */}
-      <section 
-          ref={(el) => (sectionsRef.current[9] = el)} 
-          className="h-screen flex items-center"  
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
-    
-        {/* Nửa trái - Text */}
-        <div className="w-1/2 flex items-center justify-center px-16">
-          <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part IX</span>
-              <h3 className="text-4xl font-black mb-6">The stories Title 9</h3>
-                <p className="text-slate-400 leading-relaxed italic">
-                  The stories context 9
-                </p>
-          </div>
-        </div>
-
-        {/* Nửa phải - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pr-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
-            <img 
-              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
-              alt="..."
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
-      </section>
 {/* Slide 10 */}
-     <section 
-        ref={(el) => (sectionsRef.current[10] = el)} 
-        className="h-screen flex items-center"
+      <section 
+          ref={(el) => (sectionsRef.current[11] = el)} 
+          className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
     
@@ -487,24 +549,24 @@ export default function Journey() {
     </div>
 
   </div>
-      </section>
+</section>
 {/* Slide 11 */}
       <section 
-          ref={(el) => (sectionsRef.current[11] = el)} 
+          ref={(el) => (sectionsRef.current[12] = el)} 
           className="h-screen flex items-center"  
       >       
         <div className="relative flex flex-row w-full h-full items-center">
     
-          {/* Nửa trái - Text */}
-          <div className="w-1/2 flex items-center justify-center px-16">
-            <div>
-              <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part XI</span>
-                <h3 className="text-4xl font-black mb-6">The stories Title 11</h3>
-                  <p className="text-slate-400 leading-relaxed italic">
-                    The stories context 11
-                  </p>
-            </div>
+        {/* Nửa trái - Text */}
+        <div className="w-1/2 flex items-center justify-center px-16">
+          <div>
+            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part XI</span>
+              <h3 className="text-4xl font-black mb-6">The stories Title 11</h3>
+                <p className="text-slate-400 leading-relaxed italic">
+                  The stories context 11
+                </p>
           </div>
+        </div>
 
         {/* Nửa phải - Ảnh sát mép */}
         <div className="w-1/2 h-[80vh] pr-8">
@@ -518,10 +580,10 @@ export default function Journey() {
         </div>
       </div>
       </section>
-{/* Step 12 */}
-      <section 
-        ref={(el) => (sectionsRef.current[12] = el)} 
-        className="h-screen flex items-center"  
+{/* Slide 12 */}
+     <section 
+        ref={(el) => (sectionsRef.current[13] = el)} 
+        className="h-screen flex items-center"
       >       
         <div className="relative flex flex-row w-full h-full items-center">
     
@@ -543,6 +605,67 @@ export default function Journey() {
         <h3 className="text-4xl font-black mb-6">The stories Title 12</h3>
         <p className="text-slate-400 leading-relaxed italic">
           The stories context 12
+        </p>
+      </div>
+    </div>
+
+  </div>
+      </section>
+{/* Slide 13 */}
+      <section 
+          ref={(el) => (sectionsRef.current[14] = el)} 
+          className="h-screen flex items-center"  
+      >       
+        <div className="relative flex flex-row w-full h-full items-center">
+    
+          {/* Nửa trái - Text */}
+          <div className="w-1/2 flex items-center justify-center px-16">
+            <div>
+              <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part XIII</span>
+                <h3 className="text-4xl font-black mb-6">The stories Title 13</h3>
+                  <p className="text-slate-400 leading-relaxed italic">
+                    The stories context 13
+                  </p>
+            </div>
+          </div>
+
+        {/* Nửa phải - Ảnh sát mép */}
+        <div className="w-1/2 h-[80vh] pr-8">
+          <div className="rounded-[3rem] overflow-hidden w-full h-full">
+            <img 
+              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
+              alt="..."
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+      </section>
+{/* Step 14 */}
+      <section 
+        ref={(el) => (sectionsRef.current[15] = el)} 
+        className="h-screen flex items-center"  
+      >       
+        <div className="relative flex flex-row w-full h-full items-center">
+    
+        {/* Nửa trái - Ảnh sát mép */}
+        <div className="w-1/2 h-[80vh] pl-8">
+          <div className="rounded-[3rem] overflow-hidden w-full h-full">
+            <img 
+              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
+              alt="..."
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+    {/* Nửa phải - Text */}
+    <div className="w-1/2 flex items-center justify-center px-16">
+      <div>
+        <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part XIV</span>
+        <h3 className="text-4xl font-black mb-6">The stories Title 14</h3>
+        <p className="text-slate-400 leading-relaxed italic">
+          The stories context 14
         </p>
       </div>
     </div>

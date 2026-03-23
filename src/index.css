@@ -24,3 +24,10 @@ body {
 h1, h2, h3, h4, h5, h6 {
   @apply tracking-tight;
 }
+@keyframes fadeInOut {
+  0%   { opacity: 0; }
+  27%  { opacity: 0; }   /* đen 3s */
+  45%  { opacity: 1; }   /* fade in 3s */
+  73%  { opacity: 1; }   /* giữ 5s */
+  100% { opacity: 0; }   /* fade out 3s */
+}

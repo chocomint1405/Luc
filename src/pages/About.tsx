@@ -187,7 +187,7 @@ export default function About() {
           <div className="grid lg:grid-cols-3 gap-16 items-start">
             <div className="lg:col-span-1">
               <h2 className="text-4xl font-bold mb-3 text-sky-600">What is Nuclear Medicine?</h2>
-              <div className="text-slate-600 leading-relaxed mb-5">
+              <div className="text-slate-600 leading-relaxed mb-5 text-justify">
                 <p>Nuclear medicine is a medical specialty that utilizes radioisotopes (primarily unsealed radioactive sources) for disease diagnosis, treatment, and medical research. 
               </p><p>
                This application is based on two fundamental technical principles: the radiotracer technique and the use of radiation emitted from radioisotopes to produce desired biological effects on living organisms.
@@ -206,8 +206,8 @@ export default function About() {
   <div className="p-8 rounded-2xl bg-sky-50 border border-sky-100 flex flex-col gap-6">
     <div className="flex items-start gap-4">
       <div>
-        <h3 className="text-xl font-bold text-slate-900 space-y-2">Diagnostic Imaging</h3>
-        <div className="text-sm text-slate-900 indent-6 text-[15px] space-y-3">
+        <h3 className="text-xl font-bold text-slate-900 space-y-2 mb-4">Diagnostic Imaging</h3>
+        <div className="text-sm text-slate-900 indent-6 text-[15px] space-y-3 text-justify">
           <p>
           Utilizes radiopharmaceuticals (radiotracers) to investigate physiological, biochemical, and molecular processes in vivo.
           Provides functional information, often preceding structural changes, and complements anatomical imaging.
@@ -224,9 +224,9 @@ export default function About() {
  <div className="p-8 rounded-2xl bg-sky-50 border border-sky-100 flex flex-col gap-6">
     <div className="flex items-start gap-4">
       <div>
-        <h3 className="text-xl font-bold text-slate-900 space-y-2">Radionuclide therapy
+        <h3 className="text-xl font-bold text-slate-900 space-y-2 mb-4">Radionuclide therapy
 </h3>
-        <div className="text-sm text-slate-900 indent-6 text-[15px] space-y-3">
+        <div className="text-sm text-slate-900 indent-6 text-[15px] space-y-3 text-justify">
           <p>
           Employs radiopharmaceuticals to deliver targeted ionizing radiation for therapeutic purposes.
           Based on selective uptake and retention in pathological tissues, enabling molecular-level treatmentIncludes systemic radionuclide therapy, brachytherapy, and integration with external beam approaches.

@@ -2,7 +2,7 @@ import { Trophy } from 'lucide-react';
 import { Globe, Calendar, Users } from "lucide-react";
  import { Rocket } from "lucide-react";
 const mentor = { name: 'Lê Hoàng Minh', role: 'Supervisor', img:'https://res.cloudinary.com/dbife6uva/image/upload/v1774238380/Screenshot_2026-03-23_105904_rlho8j.png'};
-
+import { useState } from "react";
 const teamMembers = [
   { name: 'Vương Uy Lực', role: 'Leader', img: 'https://res.cloudinary.com/dbife6uva/image/upload/c_crop,g_north_west,h_1720,w_1707,y_58/3764cab05e19d0478908_zbzdrn.jpg' },
   { name: 'Lê Tuấn Anh', role: 'Medical Advisor', img: 'https://res.cloudinary.com/dbife6uva/image/upload/v1774173246/IMG_9045_gfqyty.jpg' },
@@ -10,7 +10,36 @@ const teamMembers = [
   { name: 'Nguyễn Minh Thành', role: 'Content designer', img: 'https://res.cloudinary.com/dbife6uva/image/upload/c_crop,g_north_west,h_133,w_150/22260037_Nguyen_Minh_Thanh_e0q9py.jpg' },
   { name: 'Ngô Nguyễn Thành Đạt', role: 'Web designer', img: 'https://res.cloudinary.com/dbife6uva/image/upload/v1774238014/IMG_7031_oj8ot7.jpg' },
 ];
+function ZoomImage() {
+  const [pos, setPos] = useState({ x: 50, y: 50 });
+  const [zoom, setZoom] = useState(false);
 
+  return (
+    <div
+      className="w-full overflow-hidden rounded-3xl cursor-zoom-in"
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        setPos({ x, y });
+        setZoom(true); //  bắt đầu zoom
+      }}
+      onMouseLeave={() => {
+        setZoom(false); //  tắt zoom
+        setPos({ x: 50, y: 50 }); // về giữa
+      }}
+    >
+      <img
+        src="https://i.postimg.cc/d1XC39Qy/display.png"
+        className="w-full h-auto transition-transform duration-500 ease-out"
+        style={{
+          transform: zoom ? `scale(2.0)` : `scale(1)`, // 🔥 quan trọng
+          transformOrigin: `${pos.x}% ${pos.y}%`,
+        }}
+      />
+    </div>
+  );
+}
 export default function Team() {
   return (
     <div className="bg-slate-50 dark:bg-slate-900 py-4 px-4 md:px-10 lg:px-20 min-h-[calc(100vh-128px)]">
@@ -87,6 +116,34 @@ export default function Team() {
 </a>
         </div>
       </div>
-    </div>
+      <div className="md:col-span-2 flex justify-center">
+
+  {/* LEFT: IMAGE */}
+  
+<div className="w-full">
+  <ZoomImage />
+</div>
+
+  {/* RIGHT: TEXT */}
+  <div>
+    <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+      Our team Brochure
+    </h2>
+
+    <p className="text-slate-600 leading-relaxed mb-4">
+      Our system optimizes patient flow in nuclear medicine by prioritizing
+      cases based on urgency, reducing waiting time, and improving treatment efficiency.
+    </p>
+
+    <ul className="space-y-2 text-slate-600">
+      <li>✔ Optimize patient scheduling</li>
+      <li>✔ Reduce waiting time</li>
+      <li>✔ Improve healthcare quality</li>
+    </ul>
+  </div>
+{/* end */}
+</div>
+</div>
+    
   );
 }

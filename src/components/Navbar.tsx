@@ -2,38 +2,40 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 // ...existing code...
-
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-
   const navLinks = [
     { name: 'About', path: '/about' },
     { name: 'Stories', path: '/journey' },
     { name: 'News', path: '/home' },
     { name: 'Our Team', path: '/team' },
   ];
-
   function isActive(link: { path: string }) {
     return location.pathname === link.path;
   }
-
   const handleNavClick = (link: { path: string }) => {
     navigate(link.path);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
-
   return (
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900 backdrop-blur-md border-b border-sky-100 px-4 md:px-10 lg:px-20 py-4 flex items-center justify-between">
-      <Link to="/" className="flex items-center gap-2">
-        <div className="bg-sky-500 text-white p-1.5 rounded-lg flex items-center justify-center">
-          <BubbleChart size={24} />
+      <Link to="/about" className="flex items-center gap-1">
+        <div className="p-1 flex items-center justify-center w-13 h-13">
+          <img 
+            src="https://res.cloudinary.com/dbife6uva/image/upload/v1774095627/Logo_NucleUS_hackthon_zdd4r4.png" 
+            alt="NucleUS Logo" 
+            className="w-14 h-14 object-contain"
+          />
         </div>
-        <h1 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white uppercase italic">NucleUS</h1>
+       <h1 className="pr-1 text-2xl font-black tracking-tight bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-400 bg-clip-text text-transparent italic">
+  NucleUS
+</h1>
       </Link>
       <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
@@ -54,7 +56,6 @@ export default function Navbar() {
     </nav>
   );
 }
-
 function BubbleChart({ size = 24 }: { size?: number }) {
   return (
     <svg 

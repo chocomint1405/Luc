@@ -43,11 +43,13 @@ export default function Journey() {
     }
   };
 
-  window.addEventListener("keydown", handleKeyDown);
+  if (typeof window !== 'undefined') {
+    window.addEventListener("keydown", handleKeyDown);
 
-  return () => {
-    window.removeEventListener("keydown", handleKeyDown);
-  };
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }
 }, [current]);
   return (
     <div className="bg-slate-950 text-white min-h-screen">

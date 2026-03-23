@@ -13,12 +13,112 @@ import {
   Pill,
   ShieldCheck,
   Target,
+  ArrowRight,
   // ...existing code...
 } from 'lucide-react';
-import{ useState } from "react"
+import { useState, useRef, useEffect } from "react";
+
 export default function About() {
   const [activeStep, setActiveStep] = useState(null);
   const [activeCard, setActiveCard] = useState(null);
+  const [chatMessages, setChatMessages] = useState([
+    { role: "bot", text: "Hi! Ask me anything about NucleUS🚀. I can help you in English." },
+  ]);
+  const [chatInput, setChatInput] = useState("");
+  const [isNewMessage, setIsNewMessage] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  const suggestedQuestions = [
+    "What is Nuclear Medicine?",
+    "How does diagnostic imaging work?",
+    "What is radionuclide therapy?",
+    "Tell me about NucleUS project",
+    "What are the benefits of nuclear medicine?"
+  ];
+  const stepTitles = {
+    1: "Tracer Injection",
+    2: "Distribution",
+    3: "Scaning",
+    4: "Data Analysis",
+  };
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const scrollToBottom = () => {
+    if (!isClient) return;
+    setTimeout(() => {
+      if (chatEndRef.current) {
+        const container = chatEndRef.current.parentElement;
+        if (container) {
+          container.scrollTop = container.scrollHeight;
+        }
+      }
+    }, 100);
+  };
+
+  useEffect(() => {
+    if (isClient) {
+      scrollToBottom();
+    }
+  }, [chatMessages, isClient]);
+
+  const getBotReply = (question: string) => {
+    const q = question.toLowerCase();
+
+    if (q.includes("nuclear medicine")) {
+      return "Nuclear Medicine is a medical specialty that uses radioactive substances for diagnosis and treatment. It combines chemistry, physics, mathematics, computer technology, and medicine to provide information about both the structure and function of virtually every major organ system in the body.";
+    }
+
+    if (q.includes("diagnostic imaging")) {
+      return "Diagnostic imaging in nuclear medicine uses radiopharmaceuticals (radiotracers) to investigate physiological, biochemical, and molecular processes in vivo. It provides functional information that often precedes structural changes and complements anatomical imaging techniques like CT and MRI.";
+    }
+
+    if (q.includes("radionuclide therapy")) {
+      return "Radionuclide therapy employs radiopharmaceuticals to deliver targeted ionizing radiation for therapeutic purposes. It works by selective uptake and retention in pathological tissues, enabling molecular-level treatment while minimizing toxicity to normal tissues.";
+    }
+
+    if (q.includes("nucleus") || q.includes("project")) {
+      return "NucleUS is an educational project focused on Nuclear Physics and Medical Physics applications. It aims to increase awareness and understanding of nuclear medicine technologies and their role in modern healthcare.";
+    }
+
+    if (q.includes("benefits")) {
+      return "Nuclear medicine offers several key benefits: non-invasive diagnosis, early detection of diseases, targeted therapy with minimal side effects, ability to assess organ function, and the potential for personalized medicine approaches.";
+    }
+
+    if (q.includes("study") || q.includes("learn")) {
+      return "NucleUS provides knowledge and research in Nuclear Physics, Radiation, and Medical Physics. You can explore our educational resources, research findings, and learn about the latest developments in the field.";
+    }
+
+    return "Sorry, I don't have an answer for that yet. Try asking about nuclear medicine, diagnostic imaging, radionuclide therapy, or the NucleUS project!";
+  };
+
+  const handleSend = () => {
+    if (!chatInput.trim()) return;
+
+    const userMsg = { role: "user", text: chatInput };
+    const botMsg = { role: "bot", text: getBotReply(chatInput) };
+
+    setChatMessages(prev => [...prev, userMsg, botMsg]);
+    setChatInput("");
+    setIsNewMessage(true);
+    
+    // Reset animation after 500ms
+    setTimeout(() => setIsNewMessage(false), 500);
+  };
+
+  const handleSuggestedQuestion = (question: string) => {
+    const userMsg = { role: "user", text: question };
+    const botMsg = { role: "bot", text: getBotReply(question) };
+
+    setChatMessages(prev => [...prev, userMsg, botMsg]);
+    setIsNewMessage(true);
+    
+    // Reset animation after 500ms
+    setTimeout(() => setIsNewMessage(false), 500);
+  };
   return (
     <div className="bg-slate-50 dark:bg-slate-900">
       {/* Hero Section */}
@@ -31,7 +131,7 @@ export default function About() {
           >
             <span className="inline-block py-3 px-6 rounded-full bg-sky-200 text-sky-800 text-lg font-extrabold uppercase tracking-wider mb-6">Medical Awareness Project</span>
             <h1 className="text-5xl lg:text-7xl font-black leading-tight mb-8 text-slate-900">
-              <span className="text-slate-900 dark:text-white">Understanding</span> <span className="text-sky-500">Nuclear Medicine</span>
+              <span className="text-slate-800 dark:text-white">Understanding</span> <span className="text-sky-600">Nuclear Medicine</span>
             </h1>
             <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
               <span className="text-slate-600 dark:text-slate-200">A deep dive into the science that sees within. Discover how molecular imaging and targeted therapies are revolutionizing modern healthcare.</span>
@@ -39,11 +139,13 @@ export default function About() {
             <div className="flex gap-4">
               <button 
   onClick={() => {
-    document.getElementById("what-is").scrollIntoView({
-      behavior: "smooth"
-    });
+    if (typeof document !== 'undefined') {
+      document.getElementById("what-is")?.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
   }}
-  className="bg-sky-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-sky-200"
+  className="bg-sky-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-sky-200"
 >
   Get Started
 </button>
@@ -64,8 +166,8 @@ export default function About() {
     {/* Picture */}
     <img 
       alt="Abstract medical tech visualization" 
-      className="w-full h-full object-cover opacity-100"
-      src="https://res.cloudinary.com/dbife6uva/image/upload/v1773894838/Gemini_Generated_Image_uhtd18uhtd18uhtd_1_gs5bbc.png"
+      className="w-full h-full object-cover opacity-300"
+      src="https://res.cloudinary.com/dbife6uva/image/upload/v1774191239/faf54078-367f-436a-a3bc-ff76095346c9_f8keme.png"
     />
 
     {/* Overlay picture ) */}
@@ -80,40 +182,65 @@ export default function About() {
 </div>
 
       {/* What is Nuclear Medicine */}
-      <section id="what-is" className="pt-12 pb-20 bg-white scroll-mt-20">
+      <section id="what-is" className="pt-6 pb-6 bg-white scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-3 gap-16 items-start">
             <div className="lg:col-span-1">
-              <h2 className="text-3xl font-bold mb-6 text-slate-900">What is Nuclear Medicine?</h2>
-              <p className="text-slate-600 leading-relaxed mb-6">
-                Nuclear medicine is a specialized area of radiology that uses very small amounts of radioactive materials, or radiopharmaceuticals, to examine organ function and structure.
-              </p>
-              <p className="text-slate-600 leading-relaxed">
-                Unlike traditional imaging, which primarily focuses on anatomy (how things look), nuclear medicine focuses on metabolic processes (how things work) at a molecular level.
-              </p>
+              <h2 className="text-4xl font-bold mb-3 text-sky-600">What is Nuclear Medicine?</h2>
+              <div className="text-slate-600 leading-relaxed mb-5">
+                <p>Nuclear medicine is a medical specialty that utilizes radioisotopes (primarily unsealed radioactive sources) for disease diagnosis, treatment, and medical research. 
+              </p><p>
+               This application is based on two fundamental technical principles: the radiotracer technique and the use of radiation emitted from radioisotopes to produce desired biological effects on living organisms.
+             </p> </div>
+              <div className="w-full flex justify-center items-center">
+  <img
+  src="https://res.cloudinary.com/dbife6uva/image/upload/v1774193866/611db93a-a0af-45dc-a989-027cebbcf682_u7nzcf.png"
+  alt="nuclear medicine"
+  className="max-w-full h-auto rounded-xl mix-blend-multiply opacity-100"
+/>
+</div>
             </div>
-            <div className="lg:col-span-2 grid md:grid-cols-2 gap-6">
-              <div className="p-8 rounded-2xl bg-sky-50 border border-sky-100 flex flex-col gap-4">
-                <FlaskConical size={30} className="text-sky-500" />
-                <h3 className="text-xl font-bold text-slate-900">Radiopharmaceuticals content 1</h3>
-                <p className="text-sm text-slate-500">Compounds that combine a radioactive isotope with a biological molecule to target specific organs or cells.</p>
-              </div>
-              <div className="p-8 rounded-2xl bg-sky-50 border border-sky-100 flex flex-col gap-4">
-                <Microscope size={40} className="text-sky-500" />
-                <h3 className="text-xl font-bold text-slate-900">Molecular Imaging content 2</h3>
-                <p className="text-sm text-slate-500">High-resolution visualization of biological processes within the living body at the cellular level.</p>
-              </div>
-              <div className="p-8 rounded-2xl bg-sky-50 border border-sky-100 flex flex-col gap-4">
-                <Activity size={40} className="text-sky-500" />
-                <h3 className="text-xl font-bold text-slate-900">Functional Analysi content 3</h3>
-                <p className="text-sm text-slate-500">Real-time monitoring of blood flow, oxygen intake, and sugar metabolism in the body's tissues.</p>
-              </div>
-              <div className="p-8 rounded-2xl bg-sky-50 border border-sky-100 flex flex-col gap-4">
-                <Settings size={40} className="text-sky-500" />
-                <h3 className="text-xl font-bold text-slate-900">Tracer Technology content 4</h3>
-                <p className="text-sm text-slate-500">Safe, non-invasive pathways to trace systemic activity without altering the body's natural function.</p>
-              </div>
-            </div>
+            <div className="lg:col-span-2 grid grid-cols-1 gap-6">
+
+  {/* KHUNG TREN */}
+  <div className="p-8 rounded-2xl bg-sky-50 border border-sky-100 flex flex-col gap-6">
+    <div className="flex items-start gap-4">
+      <div>
+        <h3 className="text-xl font-bold text-slate-900 space-y-2">Diagnostic Imaging</h3>
+        <div className="text-sm text-slate-900 indent-6 text-[15px] space-y-3">
+          <p>
+          Utilizes radiopharmaceuticals (radiotracers) to investigate physiological, biochemical, and molecular processes in vivo.
+          Provides functional information, often preceding structural changes, and complements anatomical imaging.
+         </p><p> 
+          Encompasses radionuclide imaging techniques (planar scintigraphy, SPECT, PET) and quantitative functional studiesIncludes both in vivo imaging and in vitro assays (e.g., radioimmunoassay) for precise measurement of biological parameters.
+          Plays a central role in disease detection, staging, and therapy monitoring.
+          </p>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  {/* KHUNG DUOI */}
+ <div className="p-8 rounded-2xl bg-sky-50 border border-sky-100 flex flex-col gap-6">
+    <div className="flex items-start gap-4">
+      <div>
+        <h3 className="text-xl font-bold text-slate-900 space-y-2">Radionuclide therapy
+</h3>
+        <div className="text-sm text-slate-900 indent-6 text-[15px] space-y-3">
+          <p>
+          Employs radiopharmaceuticals to deliver targeted ionizing radiation for therapeutic purposes.
+          Based on selective uptake and retention in pathological tissues, enabling molecular-level treatmentIncludes systemic radionuclide therapy, brachytherapy, and integration with external beam approaches.
+         </p><p> 
+          Widely applied in oncology, endocrinology, and other disorders with specific biological targets.
+          Supports theranostic strategies by combining diagnostic imaging and therapy using related agents.
+          Aims to maximize therapeutic efficacy while minimizing toxicity to normal tissues.
+          </p>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
           </div>
         </div>
       </section>
@@ -123,8 +250,8 @@ export default function About() {
   <div className="max-w-7xl mx-auto px-6">
     
     <div className="text-center max-w-3xl mx-auto mb-20">
-      <h2 className="text-5xl font-black mb-6 text-slate-900">
-        Noi dung truot ngang
+      <h2 className="text-3xl font-black mb-6 text-sky-700">
+        DIAGNOSTIC IMAGING WORKFLOW
       </h2>
       <p className="text-lg text-slate-600">
         A sophisticated process from molecular targeting to actionable medical insights.
@@ -150,10 +277,11 @@ export default function About() {
         </button>
 
         <h4 className="font-bold text-lg mb-2 text-slate-900">
-          Step 1: Tracer Injection
+          1. Tracer Injection
         </h4>
         <p className="text-sm text-slate-500">
-          A tiny dose of radiopharmaceutical is administered intravenously.
+          Administration of a small amount of radiopharmaceutical into the body (in vivo).
+          Based on the radiotracer principle for functional assessment.
         </p>
       </div>
 
@@ -172,10 +300,11 @@ export default function About() {
         </button>
 
         <h4 className="font-bold text-lg mb-2 text-slate-900">
-          Step 2: Distribution
+          2. Distribution
         </h4>
         <p className="text-sm text-slate-500">
-          Waiting period while the tracer accumulates in the target tissue.
+          Selective uptake and accumulation in target tissues.
+          Reflects physiological. processes such as uptake, metabolism, and excretion.
         </p>
       </div>
 
@@ -193,10 +322,11 @@ export default function About() {
         </button>
 
         <h4 className="font-bold text-lg mb-2 text-slate-900">
-          Step 3: Scanning
+          3. Scanning
         </h4>
         <p className="text-sm text-slate-500">
-          Advanced detectors capture gamma rays emitted by the tracer.
+          Detection of emitted radiation using dedicated detector systems.
+          Generates images representing the spatial distribution of the tracer.
         </p>
       </div>
 
@@ -214,54 +344,70 @@ export default function About() {
         </button>
 
         <h4 className="font-bold text-lg mb-2 text-slate-900">
-          Step 4: Data Analysis
+          4. Data Analysis
         </h4>
         <p className="text-sm text-slate-500">
-          Computational models reconstruct the data into 3D images.
+          Processing of acquired signals into images, curves, or quantitative parameters.Enables functional evaluation and clinical diagnosis.
         </p>
       </div>
     </div>
 
    
    {/* WIDE BOX */}
+{/* WIDE BOX */}
 {activeStep && (
-  <div className="mt-20 bg-white border border-slate-200 rounded-3xl shadow-2xl p-10 max-w-7xl mx-auto">
-    
-    <div className="grid md:grid-cols-2 gap-12 items-center">
-      
-      {/* IMAGE */}
-      <div className={`${activeStep === 2 || activeStep === 4 ? "md:order-2" : "md:order-1"}`}>
-        <div className="flex items-center justify-center bg-slate-100 rounded-2xl p-4">
-          <img
-            src="https://res.cloudinary.com/dbife6uva/image/upload/v1773894838/Gemini_Generated_Image_uhtd18uhtd18uhtd_1_gs5bbc.png"
-            className="max-h-[400px] w-auto object-contain rounded-xl"
-          />
+
+  // map ảnh theo step
+  <>
+    {(() => {
+      const stepImages = {
+        1: "https://res.cloudinary.com/dbife6uva/image/upload/v1774231642/MG_1814-scaled_kdlqvz.jpg",
+        2: "https://res.cloudinary.com/dbife6uva/image/upload/v1774231642/hyg_D-1_kimemn.jpg",
+        3: "https://res.cloudinary.com/dbife6uva/image/upload/v1774231665/Understanding-the-Differences_-SPECT-Scan-vs-PET-Scan_pzgvue.png",
+        4: "https://res.cloudinary.com/dbife6uva/image/upload/v1774231638/F2.large_ccpf7y.jpg",
+      };
+
+      return (
+        <div className="mt-20 bg-white border border-slate-200 rounded-3xl shadow-2xl p-10 max-w-7xl mx-auto">
+          
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            
+            {/* IMAGE */}
+            <div className={`${activeStep === 2 || activeStep === 4 ? "md:order-2" : "md:order-1"}`}>
+              <div className="flex items-center justify-center bg-slate-100 rounded-2xl p-4">
+                <img
+                  src={stepImages[activeStep]}
+                  className="max-h-[400px] w-auto object-contain rounded-xl"
+                  alt={`Step ${activeStep}`}
+                />
+              </div>
+            </div>
+
+            {/* TEXT */}
+            <div className={`${activeStep === 2 || activeStep === 4 ? "md:order-1" : "md:order-2"}`}>
+              <h3 className="text-2xl font-bold mb-6 text-slate-900">
+                {activeStep}. {stepTitles[activeStep]}
+              </h3>
+
+              <p className="text-lg text-slate-600 leading-relaxed">
+                {activeStep === 1 && "A small amount of radiopharmaceutical is administered intravenously, introducing a radioactive tracer into the body. This tracer is designed to participate in normal physiological processes without altering them, allowing functional assessment at the molecular level. The choice of radiopharmaceutical depends on the target organ and clinical indication."}
+                {activeStep === 2 && "Following injection, the radiotracer circulates through the bloodstream and selectively accumulates in specific tissues or organs based on their biological characteristics. This distribution reflects physiological processes such as perfusion, metabolism, and receptor binding, providing insight into organ function."}
+                {activeStep === 3 && "Specialized imaging systems (gamma cameras, SPECT/PET scanners) detect the radiation emitted by the tracer within the body. The detected signals are converted into spatial data, generating images that represent the distribution and intensity of tracer uptake in different regions."}
+                {activeStep === 4 && "The acquired data are processed using computational algorithms to reconstruct images and extract quantitative parameters. Clinicians interpret these results to evaluate organ function, detect abnormalities, and support diagnosis, staging, or treatment monitoring."}
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-
-      {/* TEXT */}
-      <div className={`${activeStep === 2 || activeStep === 4 ? "md:order-1" : "md:order-2"}`}>
-        <h3 className="text-3xl font-bold mb-6 text-slate-900">
-          Step {activeStep}
-        </h3>
-
-        <p className="text-lg text-slate-600 leading-relaxed">
-          {activeStep === 1 && "A tiny dose of radiopharmaceutical is administered intravenously."}
-          {activeStep === 2 && "Waiting period while the tracer accumulates in the target tissue."}
-          {activeStep === 3 && "Advanced detectors capture gamma rays emitted by the tracer."}
-          {activeStep === 4 && "Computational models reconstruct the data into 3D images."}
-        </p>
-      </div>
-
-    </div>
-  </div>
+      );
+    })()}
+  </>
 )}
   </div>
 </section>
      {/* Advanced Modalities */}
 <section className="py-24 bg-white">
   <div className="max-w-7xl mx-auto px-6">
-    <h2 className="text-4xl font-black mb-16 text-center text-slate-900">
+    <h2 className="text-4xl font-black mb-16 text-center  text-sky-700">
       Advanced Modalities
     </h2>
 
@@ -272,9 +418,14 @@ export default function About() {
         onClick={() => setActiveCard("pet")}
         className="bg-white rounded-3xl p-10 border border-slate-200 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group cursor-pointer"
       >
-        <div className="bg-sky-50 p-4 inline-block rounded-2xl mb-8 group-hover:bg-sky-500 group-hover:text-white transition-colors">
-          <Network size={40} className="text-sky-500 group-hover:text-white" />
-        </div>
+      <div className="bg-slate-100 p-4 flex justify-center">
+   <img
+  src="https://res.cloudinary.com/dbife6uva/image/upload/v1774231640/siemens-healthineers_mi_biograph_vision_pet_ct_scanner_hotspot_image_axfjq0.webp"
+  alt="PET scanner"
+  className="w-full h-auto object-contain rounded-2xl"
+/>
+  </div>
+
 
         <h3 className="text-2xl font-bold mb-4 text-slate-900">
           PET Scanning
@@ -284,17 +435,6 @@ export default function About() {
           Positron Emission Tomography provides high-resolution 3D images of metabolic activity, essential in oncology and neurology.
         </p>
 
-        <ul className="space-y-3">
-          <li className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-            <ShieldCheck size={18} className="text-sky-500" /> Cancer Detection
-          </li>
-          <li className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-            <ShieldCheck size={18} className="text-sky-500" /> Brain Disorders
-          </li>
-          <li className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-            <ShieldCheck size={18} className="text-sky-500" /> Heart Viability
-          </li>
-        </ul>
       </div>
 
       {/* SPECT */}
@@ -302,9 +442,14 @@ export default function About() {
         onClick={() => setActiveCard("spect")}
         className="bg-white rounded-3xl p-10 border border-slate-200 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group cursor-pointer"
       >
-        <div className="bg-sky-50 p-4 inline-block rounded-2xl mb-8 group-hover:bg-sky-500 group-hover:text-white transition-colors">
-          <Camera size={40} className="text-sky-500 group-hover:text-white" />
-        </div>
+      <div className="bg-slate-100 p-4 flex justify-center">
+   <img
+  src="https://res.cloudinary.com/dbife6uva/image/upload/v1774231639/siemens-healthineers-mi-xspect-symbia-intevo-bold_sxs6dx.webp"
+  alt="PET scanner"
+  className="w-full h-auto object-contain rounded-2xl"
+/>
+  </div>
+
 
         <h3 className="text-2xl font-bold mb-4 text-slate-900">
           SPECT Imaging
@@ -314,17 +459,6 @@ export default function About() {
           Single Photon Emission Computed Tomography uses gamma cameras to create layered cross-sections of organs like the heart and bones.
         </p>
 
-        <ul className="space-y-3">
-          <li className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-            <ShieldCheck size={18} className="text-sky-500" /> Bone Scans
-          </li>
-          <li className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-            <ShieldCheck size={18} className="text-sky-500" /> Myocardial Perfusion
-          </li>
-          <li className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-            <ShieldCheck size={18} className="text-sky-500" /> Organ Function
-          </li>
-        </ul>
       </div>
 
       {/* THERANOSTICS */}
@@ -332,9 +466,15 @@ export default function About() {
         onClick={() => setActiveCard("thera")}
         className="bg-white rounded-3xl p-10 border border-slate-200 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group cursor-pointer"
       >
-        <div className="bg-sky-50 p-4 inline-block rounded-2xl mb-8 group-hover:bg-sky-500 group-hover:text-white transition-colors">
-          <Pill size={40} className="text-sky-500 group-hover:text-white" />
-        </div>
+       <div className="bg-slate-100 p-4 flex justify-center">
+   <img
+  src="https://res.cloudinary.com/dbife6uva/image/upload/v1774231640/radiopharmaceuticals-1140x640_qv6gum.jpg"
+  alt="PET scanner"
+  className="w-full h-auto object-contain rounded-2xl"
+/>
+  </div>
+
+
 
         <h3 className="text-2xl font-bold mb-4 text-slate-900">
           Theranostics
@@ -344,17 +484,7 @@ export default function About() {
           A revolutionary combination of diagnostic imaging and therapeutic intervention using the same molecular pathway.
         </p>
 
-        <ul className="space-y-3">
-          <li className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-            <ShieldCheck size={18} className="text-sky-500" /> Targeted Radiation
-          </li>
-          <li className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-            <ShieldCheck size={18} className="text-sky-500" /> Personalized Medicine
-          </li>
-          <li className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-            <ShieldCheck size={18} className="text-sky-500" /> Real-time Monitoring
-          </li>
-        </ul>
+    
       </div>
 
     </div>
@@ -373,15 +503,17 @@ export default function About() {
       <div className="relative inline-block">
         
         <img
-          src={
-            activeCard === "pet"
-              ? "https://res.cloudinary.com/dbife6uva/image/upload/v1773894838/Gemini_Generated_Image_uhtd18uhtd18uhtd_1_gs5bbc.png"
-              :"https://res.cloudinary.com/dbife6uva/image/upload/v1773894838/Gemini_Generated_Image_uhtd18uhtd18uhtd_1_gs5bbc.png"
-          
-          }
-          className="max-h-[500px] max-w-full object-contain rounded-xl block"
-        />
-
+  src={
+    activeCard === "pet"
+      ? "https://res.cloudinary.com/dbife6uva/image/upload/v1774236342/Picture1_jwsrd1.png"
+      : activeCard === "ct"
+      ? "https://res.cloudinary.com/dbife6uva/image/upload/v1774237000/your_ct_image.png"
+      : activeCard === "thera"
+      ? "https://res.cloudinary.com/dbife6uva/image/upload/v1774237115/Picture6_cybsnh.png"
+      : "https://res.cloudinary.com/dbife6uva/image/upload/v1774236722/Picture3_ngoclc.png"
+  }
+  className="max-h-[500px] max-w-full object-contain rounded-xl block"
+/>
         {/* X overlay  */}
         <button
           onClick={() => setActiveCard(null)}
@@ -400,41 +532,109 @@ export default function About() {
       {/* Patient Experience */}
       <section className="py-24 bg-sky-300 text-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div className="rounded-3xl overflow-hidden shadow-2xl">
-              <img 
-                alt="Doctor and Patient" 
-                className="w-full h-full object-cover aspect-video" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt3ITOqNmAuIWDwYTteyTA3VHYd-AgG2l_qia7SEuP8q8sl5ZrzWWz5qywR3ZifcLwn8ngASu0ztwXJ5bCnbyC7VIrdvo2VWFgeC4IXGKRZjKfX_xjHP9_jJQs0LJk2CQAdl6C1Z4NUkkQVpTNXp4NRtswA1MzJQlHotW-2dUn0EDKwF_NK5y_N1OvGeNPXSe2n0ySWSRbE9UxDmp83OS2Au8n119PdYcB8qOAYP127IHGHhqQ53i7eMjIGx5JsyBBSCj3TIvCir4"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-            <div>
-              <h2 className="text-4xl font-black mb-8">Transforming the Patient Experience</h2>
-              <div className="space-y-8">
-                <div className="flex gap-6">
-                  <ShieldCheck size={40} className="opacity-80 shrink-0" />
-                  <div>
-                    <h4 className="text-xl font-bold mb-2">Non-Invasive Diagnostics</h4>
-                    <p className="opacity-80">Avoid painful exploratory surgeries with precise molecular mapping from the outside in.</p>
-                  </div>
+          <div className="grid lg:grid-cols-3 gap-12 items-center">
+            {/* Left side - Description */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="space-y-6 lg:col-span-1"
+            >
+              <h2 className="text-4xl font-bold mb-6">Chat with NucleUS</h2>
+              <p className="text-xl leading-relaxed">
+                Have questions about Nuclear Medicine or the NucleUS project? 
+                Our AI assistant is here to help you understand the fundamentals, 
+                applications, and latest developments in this fascinating field.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <span>Learn about diagnostic imaging techniques</span>
                 </div>
-                <div className="flex gap-6">
-                  <Scan size={40} className="opacity-80 shrink-0" />
-                  <div>
-                    <h4 className="text-xl font-bold mb-2">Early Detection</h4>
-                    <p className="opacity-80">Identify diseases months or years before anatomical changes are visible on CT or MRI.</p>
-                  </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <span>Understand radionuclide therapy</span>
                 </div>
-                <div className="flex gap-6">
-                  <Target size={40} className="opacity-80 shrink-0" />
-                  <div>
-                    <h4 className="text-xl font-bold mb-2">Targeted Therapy</h4>
-                    <p className="opacity-80">Destroy diseased cells specifically, minimizing damage to surrounding healthy tissue.</p>
-                  </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <span>Explore research opportunities</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
+
+            {/* Right side - Chat Interface */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              animate={isNewMessage ? { scale: [1, 1.02, 1] } : { scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-2xl p-8 shadow-2xl lg:col-span-2"
+            >
+              <h3 className="text-lg font-semibold text-slate-900 mb-4">
+                Q&A Assistant
+              </h3>
+              
+              {/* Chat Messages */}
+              <div className="h-96 overflow-y-auto border rounded-lg p-4 mb-4 bg-slate-50 space-y-3">
+                {chatMessages.map((msg, idx) => (
+                  <div
+                    key={idx}
+                    className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                  >
+                    <div
+                      className={`px-4 py-2 rounded-lg text-sm max-w-xs ${
+                        msg.role === "user"
+                          ? "bg-sky-500 text-white"
+                          : "bg-white text-slate-900 border border-slate-200"
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
+                  </div>
+                ))}
+                <div ref={chatEndRef} />
+              </div>
+
+              {/* Suggested Questions */}
+              <div className="mb-4">
+                <p className="text-xs text-slate-500 mb-2 text-center">💡 Suggested questions:</p>
+                <div className="flex flex-wrap gap-2">
+                  {suggestedQuestions.map((question, index) => (
+                    <motion.button
+                      key={index}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.1 }}
+                      onClick={() => handleSuggestedQuestion(question)}
+                      className="px-3 py-1.5 text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 rounded-full transition-all duration-200 hover:scale-105 hover:shadow-sm"
+                    >
+                      {question}
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Chat Input */}
+              <div className="flex gap-2">
+                <input
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleSend();
+                    }
+                  }}
+                  placeholder="Ask me anything about NucleUS..."
+                  className="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                />
+                <button
+                  onClick={handleSend}
+                  className="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600 transition-colors flex items-center justify-center"
+                >
+                  <ArrowRight size={18} />
+                </button>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

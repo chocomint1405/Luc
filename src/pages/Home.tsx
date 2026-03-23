@@ -24,7 +24,7 @@ export default function Home() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.hash) {
+    if (location.hash && typeof document !== 'undefined') {
       const target = document.querySelector(location.hash);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });

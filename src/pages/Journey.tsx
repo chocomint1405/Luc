@@ -181,7 +181,7 @@ export default function Journey() {
         <div className="w-1/2 h-[80vh] pr-8">
           <div className="rounded-[3rem] overflow-hidden w-full h-full">
             <img 
-              src="Stories\Image1.png" 
+              src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image1_oc1v3a" 
               alt="..."
               className="w-full h-full object-contain"
             />
@@ -201,7 +201,7 @@ export default function Journey() {
         <div className="w-1/2 h-[80vh] pl-8">
           <div className="rounded-[3rem] overflow-hidden w-full h-full">
             <img 
-              src="Stories\Image2.png" 
+              src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
               alt="..."
               className="w-full h-full object-contain"
             />
@@ -244,7 +244,7 @@ export default function Journey() {
         <div className="w-1/2 h-[80vh] pr-8">
           <div className="rounded-[3rem] overflow-hidden w-full h-full">
             <img 
-              src="Stories\Image3.png" 
+              src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image3_mdjkin" 
               alt="..."
               className="w-full h-full object-contain"
             />
@@ -265,7 +265,7 @@ export default function Journey() {
         <div className="w-1/2 h-[80vh] pl-8">
           <div className="rounded-[3rem] overflow-hidden w-full h-full">
             <img 
-              src="Stories\Image 4.png" 
+              src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image_4_kfhdkp" 
               alt="..."
               className="w-full h-full object-contain"
             />
@@ -308,7 +308,7 @@ export default function Journey() {
         <div className="w-1/2 h-[80vh] pr-8">
           <div className="rounded-[3rem] overflow-hidden w-full h-full">
             <img 
-              src="Stories\Image5.png" 
+              src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image5_xqieay" 
               alt="..."
               className="w-full h-full object-contain"
             />

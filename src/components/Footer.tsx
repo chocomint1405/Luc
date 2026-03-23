@@ -1,73 +1,89 @@
 import { Link } from 'react-router-dom';
-
+import { useState } from 'react';
+import QAChat from "./QAchat";
+import { Mail, Phone,MapPin } from "lucide-react";
 export default function Footer() {
+  const [open, setOpen] = useState(false);
   return (
-    <footer className="bg-slate-900 text-slate-400 py-16 px-4 md:px-10 lg:px-20 border-t border-slate-800">
+    <footer className="bg-[#0b0f1a] text-slate-300 py-6 px-4 md:px-10 lg:px-20 border-t border-slate-800/50">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div className="col-span-1 md:col-span-1">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="bg-sky-500 text-white p-1 rounded flex items-center justify-center">
-              <BubbleChart size={20} />
+        <div className="col-span-3 md:col-span-3">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center justify-center">
+              <img 
+            src="https://res.cloudinary.com/dbife6uva/image/upload/v1774095627/Logo_NucleUS_hackthon_zdd4r4.png" 
+            alt="NucleUS Logo" 
+            className="w-14 h-14 object-contain"
+          />
             </div>
-            <h1 className="text-xl font-black text-white uppercase italic">NucleUS</h1>
+           <h1 className="pr-1 text-2xl font-black tracking-tight bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-400 bg-clip-text text-transparent italic">
+  NucleUS
+</h1>
           </div>
-          <p className="text-sm leading-relaxed mb-6">
-            A student-led project raising global awareness for nuclear medicine's life-saving potential.
-          </p>
-          <div className="flex gap-4">
-            <a href="#" className="hover:text-sky-500 transition-colors">
-              <Share2 size={18} />
-            </a>
-            <a href="#" className="hover:text-sky-500 transition-colors">
-              <Globe size={18} />
-            </a>
-            <a href="#" className="hover:text-sky-500 transition-colors">
-              <Mail size={18} />
-            </a>
-          </div>
+        <p className="text-[15px] leading-snug text-slate-300 text-justify hyphens-auto">
+  A project developed by a team of 1 supervisor and 5 students from the University of Science, VNU-HCM,
+  <br />
+  for Global HackAtom Vietnam 2026.
+</p>
+
+         <div className="flex flex-col gap-4 mt-6">
+
+<div className="text-[15px] flex items-center gap-2">
+  <Phone size={18} />
+  <span>02838.324468</span>
+</div>
+
+<div className="text-[15px] flex items-center gap-2">
+  <Mail size={18} />
+  <span>nucleus.hcmus@gmail.com</span>
+</div>
+  <div className="text-[15px] flex items-center gap-2">
+  <MapPin size={18} />
+  <span>227 Nguyen Van Cu Street, Cho Quan Ward, Ho Chi Minh City, Viet Nam</span>
+</div>
+
+</div>
         </div>
         
         <div>
           <h6 className="text-white font-bold mb-6">Resources</h6>
           <ul className="space-y-4 text-sm">
-            <li><a href="#" className="hover:text-sky-500">What is Nuclear Med?</a></li>
-            <li><a href="#" className="hover:text-sky-500">Safety Guidelines</a></li>
-            <li><a href="#" className="hover:text-sky-500">Career Paths</a></li>
-            <li><a href="#" className="hover:text-sky-500">Research Papers</a></li>
-          </ul>
+            <li><a href="/about" className="ext-sm text-gray-300 hover:text-sky-500 transition-colors">What is Nuclear Medicine?</a></li>
+            
+            <li><a
+  href="https://www.hackatom.energy/en/novosti/"
+  target="_blankhack"
+  className="text-sm text-gray-300 hover:text-sky-500 transition-colors"
+>
+  HackAtom Global News
+</a></li>
+            <ul>
+              <a
+  href="https://vlhn-hcmus.com/en/"
+  target="_blank"
+  className="text-sm text-gray-300 hover:text-sky-500 transition-colors"
+>
+  Nuclear Physics Department @HCMUS
+</a>
+              
+  </ul></ul>
         </div>
         
-        <div>
-          <h6 className="text-white font-bold mb-6">Platform</h6>
-          <ul className="space-y-4 text-sm">
-            <li><a href="#" className="hover:text-sky-500">About NucleUS</a></li>
-            <li><a href="#" className="hover:text-sky-500">Our Story</a></li>
-            <li><a href="#" className="hover:text-sky-500">News & Updates</a></li>
-            <li><a href="#" className="hover:text-sky-500">Partners</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h6 className="text-white font-bold mb-6">Legal</h6>
-          <ul className="space-y-4 text-sm">
-            <li><a href="#" className="hover:text-sky-500">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-sky-500">Terms of Service</a></li>
-            <li><a href="#" className="hover:text-sky-500">Medical Disclaimer</a></li>
-          </ul>
-        </div>
+      
       </div>
       
-      <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium">
-        <p>© 2026 NucleUS Project. Developed for Global Health Hackathon.</p>
+      <div className="max-w-6xl mx-auto mt-12 pt-4 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium">
+        <p>© 2026 NucleUS Project • Advancing Nuclear Medicine Awareness.</p>
         <p className="flex items-center gap-2">
-          Designed with <Heart size={14} className="text-red-500" /> for Humanity.
-        </p>
+  From Vietnam to the world 🌍.
+</p>
       </div>
+      <QAChat open={open} onClose={() => setOpen(false)} />
     </footer>
   );
 }
 
-import { Share2, Globe, Mail, Heart } from 'lucide-react';
+import { Share2, Globe, Heart } from 'lucide-react';
 
 function BubbleChart({ size = 24 }: { size?: number }) {
   return (

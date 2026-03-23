@@ -15,7 +15,7 @@ function ScrollToHash() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.hash) {
+    if (location.hash && typeof document !== 'undefined') {
       const element = document.querySelector(location.hash);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });

@@ -1,8 +1,9 @@
 import { Trophy } from 'lucide-react';
 import { Globe, Calendar, Users } from "lucide-react";
  import { Rocket } from "lucide-react";
+ import { useRef, useState } from "react";
 const mentor = { name: 'Lê Hoàng Minh', role: 'Supervisor', img:'https://res.cloudinary.com/dbife6uva/image/upload/v1774238380/Screenshot_2026-03-23_105904_rlho8j.png'};
-import { useState } from "react";
+
 const teamMembers = [
   { name: 'Vương Uy Lực', role: 'Leader', img: 'https://res.cloudinary.com/dbife6uva/image/upload/c_crop,g_north_west,h_1720,w_1707,y_58/3764cab05e19d0478908_zbzdrn.jpg' },
   { name: 'Lê Tuấn Anh', role: 'Medical Advisor', img: 'https://res.cloudinary.com/dbife6uva/image/upload/v1774173246/IMG_9045_gfqyty.jpg' },
@@ -16,24 +17,26 @@ function ZoomImage() {
 
   return (
     <div
-      className="w-full overflow-hidden rounded-3xl cursor-zoom-in"
+      className="w-full overflow-visible rounded-3xl cursor-zoom-in relative z-10"
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
         const y = ((e.clientY - rect.top) / rect.height) * 100;
         setPos({ x, y });
-        setZoom(true); //  bắt đầu zoom
+        setZoom(true);
       }}
       onMouseLeave={() => {
-        setZoom(false); //  tắt zoom
-        setPos({ x: 50, y: 50 }); // về giữa
+        setZoom(false);
+        // ← KHÔNG reset pos ở đây nữa
       }}
     >
       <img
         src="https://i.postimg.cc/d1XC39Qy/display.png"
         className="w-full h-auto transition-transform duration-500 ease-out"
         style={{
-          transform: zoom ? `scale(2.0)` : `scale(1)`, // 🔥 quan trọng
+          transform: zoom ? `scale(3.5)` : `scale(1)`,
+          //  transformOrigin giữ nguyên vị trí chuột cuối cùng,
+          //   không reset về 50% 50% để tránh giật
           transformOrigin: `${pos.x}% ${pos.y}%`,
         }}
       />
@@ -47,7 +50,7 @@ export default function Team() {
         <div className="text-center mb-10">
           <p className="text-sky-500 uppercase text-xs tracking-[0.35em] mb-2">TEAM</p>
           <h1 className="text-4xl md:text-5xl font-black text-slate-900">The NucleUS Team</h1>
-         <p className="mt-2 text-slate-600 max-w-4xl mx-auto line-clamp-2">Bridging the gap between nuclear science and global health. We are a collective of students dedicated to making life-saving nuclear innovations accessible and understandable for everyone, everywhere...</p>
+         <p className="mt-2 text-slate-600 max-w-lg mx-auto text-center">We turn advanced nuclear science into practical innovations that improve healthcare for communities around the world</p>
         </div>
 
         {/* Line 1 */}
@@ -73,6 +76,34 @@ export default function Team() {
             </div>
           ))}
         </div>
+<div className="mt-20 ">
+
+  <div className="grid md:grid-cols-[3fr_2fr] gap-16 items-center px-4 md:px-10 lg:px-20">
+  {/* LEFT: IMAGE */}
+  
+<div className="w-full max-w-xl mx-auto">
+  <ZoomImage />
+</div>
+
+  {/* RIGHT: TEXT */}
+  <div>
+    <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+      Our team Brochure
+    </h2>
+
+    <p className="text-slate-600 leading-relaxed mb-4">
+      Our system optimizes patient flow in nuclear medicine by prioritizing
+      cases based on urgency, reducing waiting time, and improving treatment efficiency.
+    </p>
+
+    <ul className="space-y-2 text-slate-600">
+      <li>✔ Optimize patient scheduling</li>
+      <li>✔ Reduce waiting time</li>
+      <li>✔ Improve healthcare quality</li>
+    </ul>
+  </div>
+  </div>
+
 
         <div className="mt-12 rounded-3xl bg-white border border-sky-200 p-6 flex flex-col md:flex-row gap-6 items-center justify-between">
           <div className="flex items-center gap-4">
@@ -116,31 +147,7 @@ export default function Team() {
 </a>
         </div>
       </div>
-      <div className="md:col-span-2 flex justify-center">
-
-  {/* LEFT: IMAGE */}
-  
-<div className="w-full">
-  <ZoomImage />
-</div>
-
-  {/* RIGHT: TEXT */}
-  <div>
-    <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-      Our team Brochure
-    </h2>
-
-    <p className="text-slate-600 leading-relaxed mb-4">
-      Our system optimizes patient flow in nuclear medicine by prioritizing
-      cases based on urgency, reducing waiting time, and improving treatment efficiency.
-    </p>
-
-    <ul className="space-y-2 text-slate-600">
-      <li>✔ Optimize patient scheduling</li>
-      <li>✔ Reduce waiting time</li>
-      <li>✔ Improve healthcare quality</li>
-    </ul>
-  </div>
+      
 {/* end */}
 </div>
 </div>

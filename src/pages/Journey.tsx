@@ -167,7 +167,7 @@ export default function Journey() {
       <div className="relative flex flex-row w-full h-full items-center">
     
         {/* Nửa trái - Text */}
-        <div className="w-1/2 flex items-center justify-center px-16">
+        <div className="w-2/5 flex items-center justify-center px-16">
           <div>
             <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part I</span>
               <h3 className="text-4xl font-black mb-6">The stories Title 1</h3>
@@ -178,12 +178,12 @@ export default function Journey() {
         </div>
 
         {/* Nửa phải - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pr-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
+        <div className="w-3/5 pr-8">
+          <div className="rounded-[3rem] overflow-hidden">
             <img 
               src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image1_oc1v3a" 
               alt="..."
-              className="w-full h-full object-contain"
+              className="w-full h-auto object-contain"
             />
           </div>
         </div>
@@ -198,8 +198,8 @@ export default function Journey() {
         <div className="relative flex flex-row w-full h-full items-center">
     
         {/* Nửa trái - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pl-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
+        <div className="w-3/5 pl-8">
+          <div className="rounded-[3rem] overflow-hidden">
             <img 
               src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
               alt="..."
@@ -209,7 +209,7 @@ export default function Journey() {
         </div>
 
         {/* Nửa phải - Text */}
-        <div className="w-1/2 flex items-center justify-center px-16">
+        <div className="w-2/5 flex items-center justify-center px-16">
           <div>
             <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part II</span>
             <h3 className="text-4xl font-black mb-6">The stories Title 2</h3>
@@ -230,7 +230,7 @@ export default function Journey() {
         <div className="relative flex flex-row w-full h-full items-center">
     
           {/* Nửa trái - Text */}
-          <div className="w-1/2 flex items-center justify-center px-16">
+          <div className="w-2/5 flex items-center justify-center px-16">
             <div>
               <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part III</span>
                 <h3 className="text-4xl font-black mb-6">The stories Title 3</h3>
@@ -241,8 +241,8 @@ export default function Journey() {
           </div>
 
         {/* Nửa phải - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pr-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
+        <div className="w-3/5  pr-8">
+          <div className="rounded-[3rem] overflow-hidden">
             <img 
               src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image3_mdjkin" 
               alt="..."
@@ -262,8 +262,8 @@ export default function Journey() {
         <div className="relative flex flex-row w-full h-full items-center">
     
         {/* Nửa trái - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pl-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
+        <div className="w-3/5 pl-8">
+          <div className="rounded-[3rem] overflow-hidden">
             <img 
               src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image_4_kfhdkp" 
               alt="..."
@@ -273,7 +273,7 @@ export default function Journey() {
         </div>
 
         {/* Nửa phải - Text */}
-        <div className="w-1/2 flex items-center justify-center px-16">
+        <div className="w-2/5 flex items-center justify-center px-16">
           <div>
             <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part IV</span>
             <h3 className="text-4xl font-black mb-6">The stories Title 4</h3>
@@ -294,7 +294,7 @@ export default function Journey() {
       <div className="relative flex flex-row w-full h-full items-center">
     
         {/* Nửa trái - Text */}
-        <div className="w-1/2 flex items-center justify-center px-16">
+        <div className="w-2/5 flex items-center justify-center px-16">
           <div>
             <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part V</span>
               <h3 className="text-4xl font-black mb-6">The stories Title 5</h3>
@@ -305,8 +305,8 @@ export default function Journey() {
         </div>
 
         {/* Nửa phải - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pr-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
+        <div className="w-3/5 pr-8">
+          <div className="rounded-[3rem] overflow-hidden">
             <img 
               src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image5_xqieay" 
               alt="..."

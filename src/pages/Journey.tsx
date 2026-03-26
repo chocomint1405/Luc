@@ -87,6 +87,7 @@ export default function Journey() {
   const [chapter2Visible, setChapter2Visible] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
   const audioRef = useRef(null);
+  const [chapter3Visible, setChapter3Visible] = useState(false);
 
 useEffect(() => {
   if (!audioRef.current) return;
@@ -102,37 +103,47 @@ useEffect(() => {
     audioRef.current.src = "/audio/2.mp3";
   }  
   else if (current === 4) {
-    audioRef.current.src = "/audio/slide4.mp3";
+    audioRef.current.src = "/audio/3.mp3";
   } 
-  else if (current === 5) {
-    audioRef.current.src = "/audio/slide5.mp3";
-  } 
+
     else if (current === 6) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/yeah.mp3";
   } 
     else if (current === 7) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/5.mp3";
   } 
     else if (current === 8) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/MGT.mp3";
   } 
-    else if (current === 9) {
-    audioRef.current.src = "/audio/slide5.mp3";
+      else if (current === 9) {
+    audioRef.current.src = "/audio/7.mp3";
   } 
     else if (current === 10) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/xe chở.mp3";
   } 
     else if (current === 11) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/chuẩn đoán.mp3";
   } 
     else if (current === 12) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/9.mp3";
   } 
     else if (current === 13) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/10.mp3";
   } 
     else if (current === 14) {
     audioRef.current.src = "/audio/slide5.mp3";
+  } 
+  else if (current === 15) {
+    audioRef.current.src = "/audio/bắt tay.mp3";
+  } 
+  else if (current === 16) {
+    audioRef.current.src = "/audio/phân đoạn.mp3";
+  } 
+  else if (current === 17) {
+    audioRef.current.src = "/audio/12.mp3";
+  } 
+   else if (current === 18) {
+    audioRef.current.src = "/audio/13.mp3";
   } 
   else {
     return; // không có audio thì thôi
@@ -151,6 +162,9 @@ useEffect(() => {
 
   if (index === 5) setChapter2Visible(true);
   else setChapter2Visible(false);
+
+  if (index === 14) setChapter3Visible(true);
+else setChapter3Visible(false);
 };
 
   const handleNext = () => scrollToSection(current + 1);
@@ -249,7 +263,7 @@ useEffect(() => {
   <div className="text-center">
     <TypewriterText 
   lines={["Chapter 1", "The Introduction"]} 
-  totalDuration={4000}
+  totalDuration={2000}
   isVisible={chapterVisible}
 />
   </div>
@@ -270,7 +284,7 @@ useEffect(() => {
   <div className="relative w-4/6">
 <button
   onClick={() => setActiveModal({
-    title: "Slide 1",
+    title: "An introduction about nuclear",
     content: (
       <div className="space-y-4 text-justify leading-relaxed">
         <p>
@@ -311,7 +325,7 @@ useEffect(() => {
 <div className="absolute right-0 translate-x-1/2 top-3/10 -translate-y-1/2 
                 bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
                 px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-  <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 2} />
+  <ChatTyper text="Hello, I am a nucleus. I usually appear around you !!!" isVisible={current === 2} />
 </div>
 
   </div>
@@ -333,7 +347,7 @@ useEffect(() => {
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/2_qyzwvn" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/2_bbn0ls" 
         alt="..."
         className="w-full h-auto object-contain"
       />
@@ -343,7 +357,7 @@ useEffect(() => {
     <div className="absolute left-0 -translate-x-1/2 top-2/10 -translate-y-1/2 
                     bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
                     px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-      <ChatTyper text="Nội dung ngắn gọn slide 2" isVisible={current === 3} />
+      <ChatTyper text="People think I am used for destructive purposes, which is really unfortunate, ...." isVisible={current === 3} />
     </div>
 
   </div>
@@ -365,7 +379,7 @@ useEffect(() => {
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/3_urko2h" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/3_yeag0c" 
         alt="..."
         className="w-full h-auto object-contain"
       />
@@ -375,7 +389,7 @@ useEffect(() => {
 <div className="absolute right-0 translate-x-1/2 top-2/10 -translate-y-1/2 
                 bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
                 px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-  <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 4} />
+  <ChatTyper text="With radioactive isotopes, I am also burdened with the reputation of posing extremely severe dangers to humans." isVisible={current === 4} />
 </div>
 
   </div>
@@ -412,7 +426,7 @@ useEffect(() => {
   <div className="relative w-4/6">
 <button
 onClick={() => setActiveModal({
-  title: "Slide 4",
+  title: "Nuclear Applications in real life",
   content: (
   <div className="space-y-5 text-justify leading-relaxed">
 
@@ -486,7 +500,7 @@ onClick={() => setActiveModal({
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/4_hcoecv" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/4_sldi7r" 
         alt="..."
         className="w-full h-auto object-contain"
       />
@@ -496,7 +510,7 @@ onClick={() => setActiveModal({
     <div className="absolute left-0 -translate-x-1/2 top-2/10 -translate-y-1/2 
                     bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
                     px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 6} />
+      <ChatTyper text="Yeah, but I am widely applied in many areas of modern life." isVisible={current === 6} />
     </div>
 
   </div>
@@ -516,7 +530,7 @@ onClick={() => setActiveModal({
   <div className="relative w-4/6">
   <button
 onClick={() => setActiveModal({
-  title: "Slide 5",
+  title: "Produce from the Nuclear Reactor",
   content: (
   <div className="space-y-5 text-justify leading-relaxed">
 
@@ -557,17 +571,17 @@ onClick={() => setActiveModal({
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/5_rr5ee0" 
+        src="https://res.cloudinary.com/dkpt2do8f/image/upload/f_auto,q_auto/ChatGPT_Image_23_24_44_26_thg_3_2026_yhwccy" 
         alt="..."
-        className="w-full h-auto object-contain"
+        className="w-[900px] h-auto mx-auto object-contain"
       />
     </div>
 
 {/* Bubble chat đè lên góc phải */}
-<div className="absolute right-0 translate-x-1/2 top-9/10 -translate-y-1/2 
+<div className="absolute right-0 translate-x-1/2 top-2/10 -translate-y-1/2 
                 bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
                 px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-  <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 7} />
+  <ChatTyper text="They are also produced in nuclear reactors" isVisible={current === 7} />
 </div>
 
   </div>
@@ -587,7 +601,7 @@ onClick={() => setActiveModal({
   <div className="relative w-4/6">
     <button
     onClick={() => setActiveModal({
-      title: "Slide 5",
+      title: "Produce from the Cyclotron",
       content: (
         <div className="space-y-4">
           <p>Đây là video minh hoạ:</p>
@@ -609,17 +623,17 @@ onClick={() => setActiveModal({
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/6_ivjhsa" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/6_ksa3zc" 
         alt="..."
         className="w-full h-auto object-contain"
       />
     </div>
 
     {/* Bubble chat đè lên góc trái */}
-    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+    <div className="absolute left-0 -translate-x-1/2 top-1/10 -translate-y-1/2 
                     bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
                     px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 8} />
+      <ChatTyper text="Radioisotopes used in nuclear medicine are produced by an accelerator called a cyclotron." isVisible={current === 8} />
     </div>
 
   </div>
@@ -672,17 +686,17 @@ onClick={() => setActiveModal({
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/7_xapl20" 
         alt="..."
-        className="w-full h-auto object-contain"
+        className="w-[900px] h-auto mx-auto object-contain"
       />
     </div>
 
     {/* Bubble chat đè lên góc trái */}
-    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+    <div className="absolute left-0 -translate-x-1/2 top-1/10 -translate-y-1/2 
                     bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
                     px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 9} />
+      <ChatTyper text="They are also produced using generators." isVisible={current === 9} />
     </div>
 
   </div>
@@ -704,17 +718,17 @@ onClick={() => setActiveModal({
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Gemini_Generated_Image_j9jn55j9jn55j9jn_wiiina" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/9_aw25kb" 
         alt="..."
         className="w-full h-auto object-contain"
       />
     </div>
 
 {/* Bubble chat đè lên góc phải */}
-<div className="absolute right-0 translate-x-1/2 top-9/10 -translate-y-1/2 
+<div className="absolute right-0 translate-x-1/2 top-8/10 -translate-y-1/2 
                 bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
                 px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-  <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 10} />
+  <ChatTyper text="But I cannot do that on my own; I need a carrier molecule, which helps me travel to the target site I need to reach" isVisible={current === 10} />
 </div>
 
   </div>
@@ -734,7 +748,7 @@ onClick={() => setActiveModal({
   <div className="relative w-4/6">
   <button
 onClick={() => setActiveModal({
-  title: "Slide 9",
+  title: "Application in diagnosis",
   content: (
   <div className="space-y-5 text-justify leading-relaxed">
 
@@ -763,17 +777,17 @@ onClick={() => setActiveModal({
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/10_gvqwzn" 
         alt="..."
         className="w-full h-auto object-contain"
       />
     </div>
 
     {/* Bubble chat đè lên góc trái */}
-    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+    <div className="absolute left-0 -translate-x-1/2 top-3/10 -translate-y-1/2 
                     bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
                     px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 11} />
+      <ChatTyper text="After becoming a radiopharmaceutical, I travel to the target or tissues of interest and emit signals detected by a detector to produce nuclear medicine images." isVisible={current === 11} />
     </div>
 
   </div>
@@ -786,14 +800,14 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 4: chapter 4 title
+    Chapter 3: chapter 3 title
   </p>
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
   <button
 onClick={() => setActiveModal({
-  title: "Slide 9",
+  title: "Application in radiotherapy",
   content: (
   <div className="space-y-5 text-justify leading-relaxed">
 
@@ -822,17 +836,17 @@ onClick={() => setActiveModal({
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/11_kj5oel" 
         alt="..."
         className="w-full h-auto object-contain"
       />
     </div>
 
     {/* Bubble chat đè lên góc trái */}
-    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+    <div className="absolute left-0 -translate-x-1/2 top-3/10 -translate-y-1/2 
                     bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
                     px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 12} />
+      <ChatTyper text=" In addition to targeting specific sites, I destroy abnormal cells when I find them." isVisible={current === 12} />
     </div>
 
   </div>
@@ -845,7 +859,7 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 4: chapter 4 title
+    Chapter 3: chapter 3 title
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -854,50 +868,235 @@ onClick={() => setActiveModal({
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Gemini_Generated_Image_j9jn55j9jn55j9jn_wiiina" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/12_1_gca7rs" 
         alt="..."
         className="w-full h-auto object-contain"
       />
     </div>
 
 {/* Bubble chat đè lên góc phải */}
-<div className="absolute right-0 translate-x-1/2 top-9/10 -translate-y-1/2 
+<div className="absolute right-0 translate-x-1/2 top-2/10 -translate-y-1/2 
                 bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
                 px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-  <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 13} />
+  <ChatTyper text="My applications in medicine contribute to improving human health." isVisible={current === 13} />
 </div>
 
   </div>
 </section>
 
+{/* Chapter 3 Intro */}
+<section
+  ref={(el) => (sectionsRef.current[14] = el)}
+  className="h-screen flex items-center justify-center bg-slate-950"
+>
+  <div className="text-center">
+    <TypewriterText 
+      lines={["Chapter 3:", "The Conclusion"]} 
+      totalDuration={2000}
+      isVisible={chapter3Visible}
+    />
+  </div>
+</section>
+
 {/* Slide 12 */}
       <section 
-  ref={(el) => (sectionsRef.current[14] = el)} 
-  className="h-screen flex flex-col items-center justify-center gap-6"
+  ref={(el) => (sectionsRef.current[15] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6 -translate-y-10"  
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 4: chapter 4 title
+    Chapter 3: chapter 3 title
   </p>
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
+  
     
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/13_wuyewt" 
         alt="..."
         className="w-full h-auto object-contain"
       />
     </div>
 
-    {/* Bubble chat đè lên góc trái */}
-    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
-                    bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
-                    px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 14} />
+{/* Bubble chat đè lên góc phải */}
+<div className="absolute right-0 translate-x-1/2 top-2/10 -translate-y-1/2 
+                bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
+                px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+  <ChatTyper text="My applications in medicine contribute to improving human health." isVisible={current === 15} />
+</div>
+
+  </div>
+</section>
+
+
+{/* Slide 13 */}
+      <section 
+  ref={(el) => (sectionsRef.current[16] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6 -translate-y-10"  
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 3: chapter 3 title
+  </p>
+
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
+  <button
+  onClick={() => setActiveModal({
+    title: "An introduction about nuclear",
+    content: (
+      <div className="space-y-4 text-justify leading-relaxed">
+        <p>
+          Segmentation in PET/SPECT imaging refers to the process of delineating regions of interest (ROIs/VOIs), such as tumors, organs, or areas of abnormal tracer uptake, in order to transform functional images into quantitative and clinically meaningful data. In PET, segmentation is particularly critical because it directly affects quantitative metrics such as standardized uptake value (SUV), as well as diagnosis, treatment response assessment, and therapy planning. In SPECT, segmentation plays a key role in dosimetry, where accurate estimation of volume and activity within target regions is essential for reliable absorbed dose calculations. However, both PET and SPECT imaging present significant challenges for segmentation, including high noise levels, low spatial resolution, partial volume effects, heterogeneous lesion characteristics, and strong dependence on manual delineation by experts. As a result, manual segmentation is time-consuming and subject to inter-observer variability, while automated and semi-automated methods are being developed to improve reproducibility and accuracy.
+        </p>
+
+        <p>
+The emergence of artificial intelligence, particularly deep learning, has significantly advanced segmentation in nuclear medicine. In PET imaging, AI enables automated and consistent lesion delineation, improving detection and quantitative analysis while integrating into the full imaging pipeline from reconstruction to clinical interpretation. In SPECT imaging, studies have shown that AI-based segmentation can improve the estimation of organ volumes and activity for dosimetry, especially in radionuclide therapy such as ^177Lu-DOTATATE. Furthermore, multimodal approaches that incorporate PET information to assist CT-based segmentation have demonstrated improved performance and efficiency. Overall, AI-based segmentation transforms PET/SPECT images from raw functional data into well-defined quantitative regions, thereby enhancing diagnostic accuracy, treatment planning, and personalized medicine.
+        </p>
+
+      </div>
+    )
+  })}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:scale-125 transition z-20"
+>
+  i
+</button>
+
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dkpt2do8f/image/upload/f_auto,q_auto/ChatGPT_Image_02_24_21_27_thg_3_2026_u0gfcr" 
+        alt="..."
+        className="h-[550px] w-auto mx-auto object-contain"
+      />
     </div>
+
+{/* Bubble chat đè lên góc phải */}
+<div className="absolute right-0 translate-x-1/2 top-4/10 -translate-y-1/2 
+                bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
+                px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+  <ChatTyper text="AI, particularly deep learning, enables automated and consistent segmentation, improving accuracy, efficiency, and quantitative analysis" isVisible={current === 16} />
+</div>
+
+  </div>
+</section>
+
+{/* Slide 14 */}
+      <section 
+  ref={(el) => (sectionsRef.current[17] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6 -translate-y-10"  
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 3: chapter 3 title
+  </p>
+
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
+  <button
+  onClick={() => setActiveModal({
+    title: "An introduction about nuclear",
+    content: (
+      <div className="space-y-4 text-justify leading-relaxed">
+        <p>
+In nuclear medicine, images are not just pictures of the body—they reflect functional processes occurring inside the body. However, PET and SPECT images are often noisy due to limited signal, and increasing the radiotracer dose to improve image quality is not safe for patients.        </p>
+
+        <p>
+AI has emerged to address this challenge. It can perform denoising to reduce noise and improve image clarity, as well as reconstruction to generate higher-quality images from raw data. In addition, AI can be combined with traditional reconstruction methods to maintain accuracy while enhancing image quality.        </p>
+
+      <p>
+As a result, images become not only clearer but also preserve important details, allowing physicians to detect lesions more easily.
+More importantly, AI enables lower radiation doses or shorter scan times while still maintaining diagnostic quality
+Therefore, AI does not simply make images look better—it makes diagnosis more accurate, faster, and safer.
+That is why AI can be considered a ‘smart lens’ in nuclear medicine.
+    </p>
+
+      
+      </div>
+    )
+  })}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:scale-125 transition z-20"
+>
+  i
+</button> 
+
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dkpt2do8f/image/upload/f_auto,q_auto/ChatGPT_Image_02_47_51_27_thg_3_2026_pxrurc" 
+        alt="..."
+        className="h-[550px] w-auto mx-auto object-contain"      />
+    </div>
+
+{/* Bubble chat đè lên góc phải */}
+<div className="absolute right-0 translate-x-1/2 top-3/10 -translate-y-1/2 
+                bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
+                px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+  <ChatTyper text="AI acting as a “smart lens” in nuclear medicine." isVisible={current === 17} />
+</div>
+
+  </div>
+</section>
+
+{/* Slide 15 */}
+      <section 
+  ref={(el) => (sectionsRef.current[18] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6 -translate-y-10"  
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 3: chapter 3 title
+  </p>
+
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
+    <button
+  onClick={() => setActiveModal({
+    title: "An introduction about nuclear",
+    content: (
+      <div className="space-y-4 text-justify leading-relaxed">
+        <p>
+          Beyond imaging and data analysis, artificial intelligence also plays a critical role in optimizing the logistics of radiopharmaceutical supply in nuclear medicine. Radioisotopes are inherently time-sensitive due to their radioactive decay, meaning their clinical effectiveness decreases rapidly over time. Therefore, efficient production, distribution, and delivery are essential to ensure their usability upon arrival at healthcare facilities.        
+        </p>
+
+        <p>
+          AI-driven systems can support the development of an intelligent supply network by forecasting demand across hospitals, optimizing production schedules at cyclotrons, and determining the most efficient transportation routes. By incorporating factors such as radioactive decay kinetics, traffic conditions, and clinical scheduling, AI can ensure that radiopharmaceuticals are delivered at the right time, to the right location, with sufficient remaining activity for clinical use.
+        </p>
+
+        <p>
+Furthermore, such systems can minimize resource wastage, improve coordination between production and clinical sites, and enhance the overall efficiency and reliability of nuclear medicine services
+        </p>
+        <p>
+          In this context, AI not only improves diagnostic and therapeutic processes but also enables a more integrated, responsive, and sustainable healthcare infrastructure for nuclear medicine.
+        </p>
+
+      
+      </div>
+    )
+  })}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:scale-125 transition z-20"
+>
+  i
+</button> 
+    
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dkpt2do8f/image/upload/f_auto,q_auto/ChatGPT_Image_02_14_58_27_thg_3_2026_zogx3d" 
+        alt="..."
+        className="h-[550px] w-auto mx-auto object-contain"
+      />
+    </div>
+
+{/* Bubble chat đè lên góc phải */}
+<div className="absolute right-0 translate-x-1/2 top-5/10 -translate-y-1/2 
+                bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
+                px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+  <ChatTyper text=" AI ensures timely delivery with sufficient activity, while reducing waste and improving the overall efficiency and sustainability of nuclear medicine services" isVisible={current === 18} />
+</div>
 
   </div>
 </section>

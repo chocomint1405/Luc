@@ -92,14 +92,15 @@ export default function Team() {
     </h2>
 
     <p className="text-slate-600 leading-relaxed mb-4">
-      Our system optimizes patient flow in nuclear medicine by prioritizing
-      cases based on urgency, reducing waiting time, and improving treatment efficiency.
+     NucleUS combines an educational platform and community forum to raise awareness
+      about nuclear medicine, providing accessible knowledge and 
+     interactive discussions for better understanding of modern healthcare.are.
     </p>
 
     <ul className="space-y-2 text-slate-600">
-      <li>✔ Optimize patient scheduling</li>
-      <li>✔ Reduce waiting time</li>
-      <li>✔ Improve healthcare quality</li>
+      <li>✔ Simplified knowledge about nuclear medicine</li>
+      <li>✔ Community-based scientific exchange</li>
+      <li>✔ Real-world medical applications made clear</li>
     </ul>
   </div>
   </div>

@@ -48,8 +48,7 @@ export default function Footer() {
         <div>
           <h6 className="text-white font-bold mb-6">Resources</h6>
           <ul className="space-y-4 text-sm">
-            <li><a href="/about" className="ext-sm text-gray-300 hover:text-sky-500 hover:underline transition-colors">
-            What is Nuclear Medicine?</a></li>
+            
             
             <li><a
   href="https://www.hackatom.energy/en/novosti/"

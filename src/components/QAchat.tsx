@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 
 interface QAChatProps {
@@ -8,7 +8,7 @@ interface QAChatProps {
 
 export default function QAChat({ open, onClose }: QAChatProps) {
   const [messages, setMessages] = useState([
-    { role: "bot", text: "Hi! Ask me anything about NucleUS🚀. I can help you in English." },
+    { role: "bot", content: <span>Hi! Ask me anything about NucleUS🚀. I can help you in English.</span> },
   ]);
   const [input, setInput] = useState("");
   const [isClient, setIsClient] = useState(false);
@@ -32,29 +32,54 @@ export default function QAChat({ open, onClose }: QAChatProps) {
   }, [messages, isClient]);
 
   
-  const getBotReply = (question) => {
-    const q = question.toLowerCase();
+  const getBotReply = (question: string): React.ReactNode => {
+  const q = question.toLowerCase();
 
-    if (q.includes("nuclear medicine")) {
-      return "Nuclear Medicine is a medical specialty that uses radioactive substances for diagnosis and treatment.";
-    }
+  if (q.includes("nuclear medicine")) {
+    return (
+      <span>
+        Nuclear Medicine is a medical specialty that uses radioactive substances for diagnosis and treatment.
+      </span>
+    );
+  }
 
-    if (q.includes("nucleus")) {
-      return "NucleUS is a project focused on Nuclear Physics and Medical Physics applications.";
-    }
+  if (q.includes("nucleus") && !q.includes("nuclear")) {
+    return (
+      <span>
+        NucleUS is a project focused on Nuclear Physics and Medical Physics applications.
+      </span>
+    );
+  }
 
-    if (q.includes("study") || q.includes("learn")) {
-      return "NucleUS provides knowledge and research in Nuclear Physics, Radiation, and Medical Physics.";
-    }
+  if (q.includes("study") || q.includes("learn")) {
+    return (
+      <span>
+        NucleUS provides knowledge and research in Nuclear Physics, Radiation, and Medical Physics.
+      </span>
+    );
+  }
 
-    return "Sorry, I don't have an answer for that yet.";
-  };
+  return (
+    <span>
+      Sorry, I don't have an answer foryet. Please visit the{" "}
+      <a
+        href="https://nucleus-forum.vercel.app"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-gray-800 hover:text-sky-800 hover:underline"
+      >
+        NucleUSForum
+      </a>{" "}
+      immediately.
+    </span>
+  );
+};
 
   const handleSend = () => {
     if (!input.trim()) return;
 
-    const userMsg = { role: "user", text: input };
-    const botMsg = { role: "bot", text: getBotReply(input) };
+    const userMsg = { role: "user", content: <span>{input}</span> };
+    const botMsg = { role: "bot", content: getBotReply(input) };
 
     setMessages([...messages, userMsg, botMsg]);
     setInput("");
@@ -97,7 +122,7 @@ export default function QAChat({ open, onClose }: QAChatProps) {
                         : "bg-gray-200 text-black"
                     }`}
                   >
-                    {msg.text}
+                    {msg.content}
                   </div>
                 </div>
               ))}

@@ -9,10 +9,10 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const navLinks = [
-    { name: 'About', path: '/about' },
+    { name: 'Overview', path: '/about' },
     { name: 'Stories', path: '/journey' },
-    { name: 'News', path: '/home' },
-    { name: 'Our Team', path: '/team' },
+    { name: 'Forum', path: '/home' },
+    { name: 'About Us', path: '/team' },
   ];
   function isActive(link: { path: string }) {
     return location.pathname === link.path;

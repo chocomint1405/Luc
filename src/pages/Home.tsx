@@ -45,19 +45,22 @@ export default function Home() {
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-600"></span>
             </span>
-            The Future of Diagnostics
+    Welcome to
           </motion.div>
           
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black leading-[1.1] mb-8 max-w-4xl text-slate-900"
-          >
-            Unveiling the <span className="text-sky-500 italic">Invisible</span> for a Healthier World
-          </motion.h1>
+       <motion.div>
+  <div className="flex items-baseline justify-center gap-1.5">
+    <span className="pr-3 text-8xl font-black tracking-tight bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-400 bg-clip-text text-transparent italic">
+      NucleUS
+    </span>
+
+    <span className="text-2xl font-bold uppercase tracking-[0.2em] text-primary text-emerald-900">
+      Forum
+    </span>
+  </div>
+</motion.div>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -65,7 +68,7 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="text-lg md:text-xl text-slate-600 max-w-2xl mb-10 leading-relaxed"
           >
-            NucleUS is a medical awareness initiative dedicated to educating the public about the life-saving potential of nuclear medicine and molecular imaging.
+            A platform connecting people to explore and exchange ideas in nuclear medicine and advanced healthcare.
           </motion.p>
           
           <motion.div 
@@ -74,34 +77,15 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="flex flex-wrap justify-center gap-4"
           >
-            <button className="bg-sky-500 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:translate-y-[-2px] transition-all shadow-lg shadow-sky-200">
-              Explore Nuclear Medicine
-              <ArrowRight size={20} />
-            </button>
-            <button className="bg-white border border-slate-200 px-8 py-4 rounded-xl font-bold hover:bg-slate-50 transition-all">
-              View Impact Stories
-            </button>
+            <button
+  onClick={() => window.open("https://nucleus-forum.vercel.app", "_blank")}
+  className="bg-sky-500 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:-translate-y-1 transition-all shadow-lg shadow-sky-200"
+>
+  Start now
+  <ArrowRight size={20} />
+</button>
           </motion.div>
           
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="mt-20 w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative group cursor-pointer"
-          >
-            <div className="absolute inset-0 bg-sky-500/20 mix-blend-multiply transition-opacity group-hover:opacity-10"></div>
-            <img 
-              alt="Futuristic medical imaging interface" 
-              className="w-full h-[500px] object-cover" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnxRH0SwILzpQG7-A8d4l2h2C1unQOrqIdcI6rfYcrsY4wu4fAvMGHi5WHVnXMcPsoNe48IIyRapPlPNmtOGKZofE7I2TCpBP6p0UYBpNo-XuGOIK5jOINc2HdlFqNMzSRz8_LYdtPAfaNO3rdk9AI17ArDQw2glD6f-xyOmcZCICm9bVQMB8Ids4Niiy_PhfPkXYkicLssVCJgmhfQapDIhLPNr30PHmetOdUSqV8bPFHbs-5_ASPI-rNj70AWpFz7JWrSmpwhV8"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20">
-                <PlayCircle size={64} className="text-white" />
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 

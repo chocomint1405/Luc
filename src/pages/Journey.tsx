@@ -102,31 +102,26 @@ useEffect(() => {
     audioRef.current.src = "/audio/2.mp3";
   }  
   else if (current === 4) {
-    audioRef.current.src = "/audio/slide4.mp3";
+    audioRef.current.src = "/audio/3.mp3";
   } 
-  else if (current === 5) {
-    audioRef.current.src = "/audio/slide5.mp3";
-  } 
+
     else if (current === 6) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/4.mp3";
   } 
     else if (current === 7) {
-    audioRef.current.src = "/audio/slide5.mp3";
-  } 
-    else if (current === 8) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/5.mp3";
   } 
     else if (current === 9) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/7.mp3";
   } 
     else if (current === 10) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/8.mp3";
   } 
     else if (current === 11) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/9.mp3";
   } 
     else if (current === 12) {
-    audioRef.current.src = "/audio/slide5.mp3";
+    audioRef.current.src = "/audio/10.mp3";
   } 
     else if (current === 13) {
     audioRef.current.src = "/audio/slide5.mp3";

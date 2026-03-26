@@ -48,12 +48,13 @@ export default function Footer() {
         <div>
           <h6 className="text-white font-bold mb-6">Resources</h6>
           <ul className="space-y-4 text-sm">
-            <li><a href="/about" className="ext-sm text-gray-300 hover:text-sky-500 transition-colors">What is Nuclear Medicine?</a></li>
+            <li><a href="/about" className="ext-sm text-gray-300 hover:text-sky-500 hover:underline transition-colors">
+            What is Nuclear Medicine?</a></li>
             
             <li><a
   href="https://www.hackatom.energy/en/novosti/"
   target="_blankhack"
-  className="text-sm text-gray-300 hover:text-sky-500 transition-colors"
+  className="text-sm text-gray-300 hover:text-sky-500 hover:underline transition-colors"
 >
   HackAtom Global News
 </a></li>
@@ -61,21 +62,17 @@ export default function Footer() {
               <a
   href="https://vlhn-hcmus.com/en/"
   target="_blank"
-  className="text-sm text-gray-300 hover:text-sky-500 transition-colors"
+  className="text-sm text-gray-300 hover:text-sky-500 hover:underline transition-colors"
 >
   Nuclear Physics Department @HCMUS
-</a>
-              
+</a>         
   </ul></ul>
         </div>
-        
-      
       </div>
-      
       <div className="max-w-6xl mx-auto mt-12 pt-4 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium">
         <p>© 2026 NucleUS Project • Advancing Nuclear Medicine Awareness.</p>
         <p className="flex items-center gap-2">
-  From Vietnam to the world 🌍.
+        From Vietnam to the world 🌍.
 </p>
       </div>
       <QAChat open={open} onClose={() => setOpen(false)} />

@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import type { ReactNode } from "react";
 import { 
   FlaskConical, 
   Microscope, 
@@ -18,10 +19,15 @@ import {
 } from 'lucide-react';
 import { useState, useRef, useEffect } from "react";
 
+type ChatMessage = {
+  role: "bot" | "user";
+  text: ReactNode;
+};
+
 export default function About() {
   const [activeStep, setActiveStep] = useState(null);
   const [activeCard, setActiveCard] = useState(null);
-  const [chatMessages, setChatMessages] = useState([
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     { role: "bot", text: "Hi! Ask me anything about NucleUS🚀. I can help you in English." },
   ]);
   const [chatInput, setChatInput] = useState("");
@@ -39,7 +45,7 @@ export default function About() {
   const stepTitles = {
     1: "Tracer Injection",
     2: "Distribution",
-    3: "Scaning",
+    3: "Scanning",
     4: "Data Analysis",
   };
 
@@ -92,7 +98,20 @@ export default function About() {
       return "NucleUS provides knowledge and research in Nuclear Physics, Radiation, and Medical Physics. You can explore our educational resources, research findings, and learn about the latest developments in the field.";
     }
 
-    return "Sorry, I don't have an answer for that yet. Try asking about nuclear medicine, diagnostic imaging, radionuclide therapy, or the NucleUS project!";
+    return (
+      <span>
+        Sorry, I don't have an answer for that yet. Please visit the{" "}
+        <a
+          href="https://nucleus-forum.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-sky-700 hover:text-sky-800 hover:underline"
+        >
+          NucleUS Forum
+        </a>
+        .
+      </span>
+    );
   };
 
   const handleSend = () => {
@@ -134,7 +153,7 @@ export default function About() {
               <span className="text-slate-800 dark:text-white">Understanding</span> <span className="text-sky-600">Nuclear Medicine</span>
             </h1>
             <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">
-              <span className="text-slate-600 dark:text-slate-200">A deep dive into the science that sees within. Discover how molecular imaging and targeted therapies are revolutionizing modern healthcare.</span>
+              <span className="text-slate-600 dark:text-slate-200">For anyone seeking to delve deeper into the science of seeing inside the body. Learn how molecular imaging and targeted therapies are revolutionizing modern medicine.</span>
             </p>
             <div className="flex gap-4">
               <button 
@@ -161,13 +180,13 @@ export default function About() {
 >
   <div className="absolute -inset-4 bg-sky-500/20 rounded-full blur-3xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
 
-  <div className="relative rounded-3xl overflow-hidden border border-white/20 shadow-2xl aspect-square lg:aspect-video bg-slate-900 flex items-center justify-center">
+<div className="relative rounded-3xl overflow-hidden border border-white/20 shadow-2xl aspect-square lg:aspect-video bg-white">
     
     {/* Picture */}
     <img 
       alt="Abstract medical tech visualization" 
-      className="w-full h-full object-cover opacity-300"
-      src="https://res.cloudinary.com/dbife6uva/image/upload/v1774191239/faf54078-367f-436a-a3bc-ff76095346c9_f8keme.png"
+      className="w-full h-full object-cover"
+      src="https://res.cloudinary.com/dbife6uva/image/upload/v1774522519/Gemini_Generated_Image_wu62bawu62bawu62_rxhoah.png"
     />
 
     {/* Overlay picture ) */}
@@ -186,12 +205,11 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-3 gap-16 items-start">
             <div className="lg:col-span-1">
-              <h2 className="text-4xl font-bold mb-3 text-sky-600">What is Nuclear Medicine?</h2>
-              <div className="text-slate-600 leading-relaxed mb-5 text-justify">
-                <p>Nuclear medicine is a medical specialty that utilizes radioisotopes (primarily unsealed radioactive sources) for disease diagnosis, treatment, and medical research. 
-              </p><p>
-               This application is based on two fundamental technical principles: the radiotracer technique and the use of radiation emitted from radioisotopes to produce desired biological effects on living organisms.
-             </p> </div>
+              <div className="text-4xl font-bold mb-6 text-sky-600">What is <h2 text-sky-400>Nuclear Medicine?</h2></div>
+        <div className="max-w-2xl indent-6 mx-auto text-slate-900 text-[16.5px] leading-7 text-left hyphens-none space-y-3">
+                <p>Nuclear medicine is a medical specialty that utilizes radioisotopes (primarily unsealed radioactive sources) for disease diagnosis, treatment, and medical research.</p>
+                <p>This application is based on two fundamental technical principles: the radiotracer technique and the use of radiation emitted from radioisotopes to produce desired biological effects on living organisms.</p>
+        </div>
               <div className="w-full flex justify-center items-center">
   <img
   src="https://res.cloudinary.com/dbife6uva/image/upload/v1774193866/611db93a-a0af-45dc-a989-027cebbcf682_u7nzcf.png"
@@ -207,12 +225,12 @@ export default function About() {
     <div className="flex items-start gap-4">
       <div>
         <h3 className="text-xl font-bold text-slate-900 space-y-2 mb-4">Diagnostic Imaging</h3>
-        <div className="text-sm text-slate-900 indent-6 text-[15px] space-y-3 text-justify">
+        <div className="text-sm text-slate-900 indent-6 text-[15px] space-y-3 text-left max-w-2xl">
           <p>
           Utilizes radiopharmaceuticals (radiotracers) to investigate physiological, biochemical, and molecular processes in vivo.
           Provides functional information, often preceding structural changes, and complements anatomical imaging.
          </p><p> 
-          Encompasses radionuclide imaging techniques (planar scintigraphy, SPECT, PET) and quantitative functional studiesIncludes both in vivo imaging and in vitro assays (e.g., radioimmunoassay) for precise measurement of biological parameters.
+          Encompasses radionuclide imaging techniques (planar scintigraphy, SPECT, PET/CT,...) and quantitative functional studies. Includes both in vivo imaging and in vitro assays (e.g., radioimmunoassay) for precise measurement of biological parameters.
           Plays a central role in disease detection, staging, and therapy monitoring.
           </p>
           </div>
@@ -226,10 +244,10 @@ export default function About() {
       <div>
         <h3 className="text-xl font-bold text-slate-900 space-y-2 mb-4">Radionuclide therapy
 </h3>
-        <div className="text-sm text-slate-900 indent-6 text-[15px] space-y-3 text-justify">
+        <div className="text-sm text-slate-900 indent-6 text-[15px] space-y-4 text-left max-w-2xl">
           <p>
           Employs radiopharmaceuticals to deliver targeted ionizing radiation for therapeutic purposes.
-          Based on selective uptake and retention in pathological tissues, enabling molecular-level treatmentIncludes systemic radionuclide therapy, brachytherapy, and integration with external beam approaches.
+          Based on selective uptake and retention in pathological tissues, enabling molecular-level treatment. Includes systemic radionuclide therapy, brachytherapy, and integration with external beam approaches.
          </p><p> 
           Widely applied in oncology, endocrinology, and other disorders with specific biological targets.
           Supports theranostic strategies by combining diagnostic imaging and therapy using related agents.
@@ -260,7 +278,7 @@ export default function About() {
 
     {/* ICON GRID */}
     <div className="relative grid md:grid-cols-4 gap-8">
-      <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-200 -z-0"></div>
+      <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-slate-500 -z-0"></div>
 
       {/* STEP 1 */}
       <div className="relative z-10 flex flex-col items-center text-center">
@@ -304,7 +322,7 @@ export default function About() {
         </h4>
         <p className="text-sm text-slate-500">
           Selective uptake and accumulation in target tissues.
-          Reflects physiological. processes such as uptake, metabolism, and excretion.
+          Reflects physiological processes such as uptake, metabolism, and excretion.
         </p>
       </div>
 
@@ -506,8 +524,8 @@ export default function About() {
   src={
     activeCard === "pet"
       ? "https://res.cloudinary.com/dbife6uva/image/upload/v1774236342/Picture1_jwsrd1.png"
-      : activeCard === "ct"
-      ? "https://res.cloudinary.com/dbife6uva/image/upload/v1774237000/your_ct_image.png"
+      : activeCard === "spect"
+      ? "https://res.cloudinary.com/dbife6uva/image/upload/v1774236722/Picture3_ngoclc.png"
       : activeCard === "thera"
       ? "https://res.cloudinary.com/dbife6uva/image/upload/v1774237115/Picture6_cybsnh.png"
       : "https://res.cloudinary.com/dbife6uva/image/upload/v1774236722/Picture3_ngoclc.png"
@@ -530,7 +548,7 @@ export default function About() {
 )}
 </section>
       {/* Patient Experience */}
-      <section className="py-24 bg-sky-300 text-white">
+      <section className="py-24 bg-sky-200 text-blue">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-3 gap-12 items-center">
             {/* Left side - Description */}
@@ -539,24 +557,36 @@ export default function About() {
               whileInView={{ opacity: 1, x: 0 }}
               className="space-y-6 lg:col-span-1"
             >
-              <h2 className="text-4xl font-bold mb-6">Chat with NucleUS</h2>
-              <p className="text-xl leading-relaxed">
+              <h2 className="text-3xl font-bold mb-6">Chat with NucleUS</h2>
+              <p className="text-[18px] leading-relaxed">
                 Have questions about Nuclear Medicine or the NucleUS project? 
                 Our AI assistant is here to help you understand the fundamentals, 
                 applications, and latest developments in this fascinating field.
               </p>
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span>Learn about diagnostic imaging techniques</span>
+                <div className="flex  gap-3">
+  <div className="w-2 h-2 bg-black rounded-full flex-shrink-0 mt-[6px]"></div>
+                  <span>
+                  Learn the basics of Nuclear Medicine through the available questionnaires</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span>Understand radionuclide therapy</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div className="flex  gap-3">
+  <div className="w-2 h-2 bg-black rounded-full flex-shrink-0 mt-[6px]"></div>
                   <span>Explore research opportunities</span>
+                </div>
+               <div className="flex gap-3">
+  <div className="w-2 h-2 bg-black rounded-full flex-shrink-0 mt-[6px]"></div>
+                  <span>Explore research opportunities
+                    Go to the "
+                  
+              <a
+  href="https://nucleus-forum.vercel.app"
+  target="_blank"
+  className="text-[18px] text-gray-800 hover:text-sky-800 hover:underline text-white transition-colors"
+>
+  NucleUS Forum
+</a>         
+  " if you want to respond to requests from the community involved in the project.
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -570,7 +600,7 @@ export default function About() {
               className="bg-white rounded-2xl p-8 shadow-2xl lg:col-span-2"
             >
               <h3 className="text-lg font-semibold text-slate-900 mb-4">
-                Q&A Assistant
+                Questions & Answers 
               </h3>
               
               {/* Chat Messages */}

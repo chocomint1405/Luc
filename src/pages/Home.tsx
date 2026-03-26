@@ -79,16 +79,17 @@ export default function Home() {
           >
             <button
   onClick={() => window.open("https://nucleus-forum.vercel.app", "_blank")}
-  className="bg-sky-500 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:-translate-y-1 transition-all shadow-lg shadow-sky-200"
+  className="bg-sky-500 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:-translate-y-1 transition-all shadow-lg shadow-sky-200 mb-4"
 >
   Start now
   <ArrowRight size={20} />
 </button>
           </motion.div>
-          
+          <div>
+              Look for verified badges for trusted answers
+          </div>
         </div>
       </section>
-
     </div>
   );
 }

@@ -18,6 +18,7 @@ function TypewriterText({ lines, totalDuration, isVisible }) {
   const fullText = lines.join("\n");
   const charTime = totalDuration / fullText.length;
 
+
   useEffect(() => {
     if (!isVisible) return; // chỉ chạy khi visible
     
@@ -42,10 +43,29 @@ function TypewriterText({ lines, totalDuration, isVisible }) {
   );
 }
 
+function ChatTyper({ text, isVisible }) {
+  const [displayed, setDisplayed] = useState("");
+
+  useEffect(() => {
+    if (!isVisible) return;
+    let i = 0;
+    setDisplayed("");
+    const interval = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) clearInterval(interval);
+    }, 50); // 50ms mỗi chữ
+    return () => clearInterval(interval);
+  }, [isVisible]);
+
+  return <span>{displayed}</span>;
+}
+
 export default function Journey() {
   const sectionsRef = useRef([]);
   const [current, setCurrent] = useState(0);
   const [chapterVisible, setChapterVisible] = useState(false);
+  const [chapter2Visible, setChapter2Visible] = useState(false);
 
   const scrollToSection = (index) => {
   if (index < 0 || index >= sectionsRef.current.length) return;
@@ -54,6 +74,9 @@ export default function Journey() {
   
   if (index === 1) setChapterVisible(true); // index 1 là Chapter section
   else setChapterVisible(false); // reset khi rời đi
+
+  if (index === 5) setChapter2Visible(true);
+  else setChapter2Visible(false);
 };
 
   const handleNext = () => scrollToSection(current + 1);
@@ -152,526 +175,413 @@ export default function Journey() {
   <div className="text-center">
     <TypewriterText 
   lines={["Chapter 1", "The Introduction"]} 
-  totalDuration={5000}
+  totalDuration={4000}
   isVisible={chapterVisible}
 />
   </div>
 </section>
 
-      {/* Timeline Section */}
-  {/*Slide 1*/}
-      <section 
-          ref={(el) => (sectionsRef.current[2] = el)} 
-          className="h-screen flex items-center"  
-      >       
-      <div className="relative flex flex-row w-full h-full items-center">
-    
-        {/* Nửa trái - Text */}
-        <div className="w-2/5 flex items-center justify-center px-16">
-          <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part I</span>
-              <h3 className="text-4xl font-black mb-6">The stories Title 1</h3>
-                <p className="text-slate-400 leading-relaxed italic">
-          The stories context 1
-                </p>
-          </div>
-        </div>
+{/* Timeline Section */}
+{/*Slide 1*/}
+<section 
+  ref={(el) => (sectionsRef.current[2] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6 -translate-y-10"  
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 1: The Introduction
+  </p>
 
-        {/* Nửa phải - Ảnh sát mép */}
-        <div className="w-3/5 pr-8">
-          <div className="rounded-[3rem] overflow-hidden">
-            <img 
-              src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image1_oc1v3a" 
-              alt="..."
-              className="w-full h-auto object-contain"
-            />
-          </div>
-        </div>
-      </div>
-      </section>
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
+    
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Gemini_Generated_Image_j9jn55j9jn55j9jn_wiiina" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
+    </div>
+
+{/* Bubble chat đè lên góc phải */}
+<div className="absolute right-0 translate-x-1/2 top-9/10 -translate-y-1/2 
+                bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
+                px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+  <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 2} />
+</div>
+
+  </div>
+</section>
 
 {/* Slide 2 */}
-      <section 
-          ref={(el) => (sectionsRef.current[3] = el)} 
-          className="h-screen flex items-center"
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
+<section 
+  ref={(el) => (sectionsRef.current[3] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6"
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 1: The Introduction
+  </p>
+
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
     
-        {/* Nửa trái - Ảnh sát mép */}
-        <div className="w-3/5 pl-8">
-          <div className="rounded-[3rem] overflow-hidden">
-            <img 
-              src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
-              alt="..."
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </div>
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
+    </div>
 
-        {/* Nửa phải - Text */}
-        <div className="w-2/5 flex items-center justify-center px-16">
-          <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part II</span>
-            <h3 className="text-4xl font-black mb-6">The stories Title 2</h3>
-            <p className="text-slate-400 leading-relaxed italic">
-              The stories context 2
-            </p>
-          </div>
-        </div>
+    {/* Bubble chat đè lên góc trái */}
+    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+                    bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
+                    px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+      <ChatTyper text="Nội dung ngắn gọn slide 2" isVisible={current === 3} />
+    </div>
 
-        </div>
-      </section>
+  </div>
+</section>
 
 {/* Slide 3 */}
-      <section 
-          ref={(el) => (sectionsRef.current[4] = el)} 
-          className="h-screen flex items-center"  
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
+  <section 
+  ref={(el) => (sectionsRef.current[4] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6 -translate-y-10"  
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 1: The Introduction
+  </p>
+
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
     
-          {/* Nửa trái - Text */}
-          <div className="w-2/5 flex items-center justify-center px-16">
-            <div>
-              <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part III</span>
-                <h3 className="text-4xl font-black mb-6">The stories Title 3</h3>
-                  <p className="text-slate-400 leading-relaxed italic">
-                    The stories context 3
-                  </p>
-            </div>
-          </div>
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Gemini_Generated_Image_j9jn55j9jn55j9jn_wiiina" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
+    </div>
 
-        {/* Nửa phải - Ảnh sát mép */}
-        <div className="w-3/5  pr-8">
-          <div className="rounded-[3rem] overflow-hidden">
-            <img 
-              src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image3_mdjkin" 
-              alt="..."
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </div>
-      </div>
-      </section>
+{/* Bubble chat đè lên góc phải */}
+<div className="absolute right-0 translate-x-1/2 top-9/10 -translate-y-1/2 
+                bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
+                px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+  <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 4} />
+</div>
 
+  </div>
+</section>
+
+{/* Chapter Intro */}
+<section
+  ref={(el) => (sectionsRef.current[5] = el)}
+  className="h-screen flex items-center justify-center bg-slate-950"
+  
+>
+  <div className="text-center">
+  {/* Chapter 2 Intro */}
+<TypewriterText 
+  lines={["Chapter 2", "Chapter 2 title"]} 
+  totalDuration={4000}
+  isVisible={chapter2Visible}
+/>
+  </div>
+</section>
 
 {/* Slide 4 */}
       <section 
-          ref={(el) => (sectionsRef.current[5] = el)} 
-          className="h-screen flex items-center"
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
+  ref={(el) => (sectionsRef.current[6] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6"
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 2: Title
+  </p>
+
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
     
-        {/* Nửa trái - Ảnh sát mép */}
-        <div className="w-3/5 pl-8">
-          <div className="rounded-[3rem] overflow-hidden">
-            <img 
-              src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image_4_kfhdkp" 
-              alt="..."
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </div>
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
+    </div>
 
-        {/* Nửa phải - Text */}
-        <div className="w-2/5 flex items-center justify-center px-16">
-          <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part IV</span>
-            <h3 className="text-4xl font-black mb-6">The stories Title 4</h3>
-            <p className="text-slate-400 leading-relaxed italic">
-              The stories context 4
-            </p>
-          </div>
-        </div>
+    {/* Bubble chat đè lên góc trái */}
+    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+                    bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
+                    px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 6} />
+    </div>
 
-        </div>
-      </section>
+  </div>
+</section>
 
-  {/*Slide 5*/}
+{/*Slide 5*/}
       <section 
-          ref={(el) => (sectionsRef.current[6] = el)} 
-          className="h-screen flex items-center"  
-      >       
-      <div className="relative flex flex-row w-full h-full items-center">
-    
-        {/* Nửa trái - Text */}
-        <div className="w-2/5 flex items-center justify-center px-16">
-          <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part V</span>
-              <h3 className="text-4xl font-black mb-6">The stories Title 5</h3>
-                <p className="text-slate-400 leading-relaxed italic">
-          The stories context 5
-                </p>
-          </div>
-        </div>
+  ref={(el) => (sectionsRef.current[7] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6 -translate-y-10"  
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 2: The Title
+  </p>
 
-        {/* Nửa phải - Ảnh sát mép */}
-        <div className="w-3/5 pr-8">
-          <div className="rounded-[3rem] overflow-hidden">
-            <img 
-              src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image5_xqieay" 
-              alt="..."
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </div>
-      </div>
-      </section>
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
+    
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Gemini_Generated_Image_j9jn55j9jn55j9jn_wiiina" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
+    </div>
+
+{/* Bubble chat đè lên góc phải */}
+<div className="absolute right-0 translate-x-1/2 top-9/10 -translate-y-1/2 
+                bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
+                px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+  <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 7} />
+</div>
+
+  </div>
+</section>
 
 {/* Slide 6 */}
       <section 
-          ref={(el) => (sectionsRef.current[7] = el)} 
-          className="h-screen flex items-center"
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
+  ref={(el) => (sectionsRef.current[8] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6"
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 2: Title
+  </p>
+
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
     
-        {/* Nửa trái - Text */}
-        <div className="w-1/2 flex items-center justify-center px-16">
-          <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part VI</span>
-            <h3 className="text-4xl font-black mb-6">The stories Title 6</h3>
-            <p className="text-slate-400 leading-relaxed italic">
-              The stories context 6
-            </p>
-          </div>
-        </div>
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
+    </div>
 
-        {/* Nửa phải - 3 ảnh */}
-        <div className="w-1/2 h-[80vh] pr-8 flex flex-row gap-4">
-      
-          {/* Chữ nhật cao bên trái */}
-          <div className="w-1/2 h-full rounded-[2rem] overflow-hidden">
-            <img 
-              src="https://oncologybuddies.com/wp-content/uploads/2020/02/Nuclear-Medicine.jpg" 
-              alt="..."
-              className="w-full h-full object-cover"
-            />
-          </div>
+    {/* Bubble chat đè lên góc trái */}
+    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+                    bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
+                    px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 8} />
+    </div>
 
-          {/* Cột phải: vuông + chữ nhật nhỏ */}
-          <div className="w-1/2 h-full flex flex-col gap-4">
-        
-            {/* Hình vuông */}
-            <div className="w-full aspect-square rounded-[2rem] overflow-hidden">
-              <img 
-                src="https://d38sso7f6qz01j.cloudfront.net/original_images/nuclear-medicine-1600x732.jpg" 
-                alt="..."
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Chữ nhật nhỏ bên dưới */}
-            <div className="w-full flex-1 rounded-[2rem] overflow-hidden">
-              <img 
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTroWrCT9AnxzrQNHpNXkSSrqTNTUJhlnn6fw&s" 
-                alt="..."
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-          </div>
-        </div>
-
-        </div>
-      </section>
-
+  </div>
+</section>
 
 {/* Slide 7 */}
       <section 
-        ref={(el) => (sectionsRef.current[8] = el)} 
-        className="h-screen flex items-center"
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
+  ref={(el) => (sectionsRef.current[9] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6"
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 3: Chapter 3 Title
+  </p>
+
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
     
-        {/* Nửa trái - 3 ảnh */}
-        <div className="w-1/2 h-[80vh] pl-8 flex flex-row gap-4">
-      
-          {/* Chữ nhật cao bên trái */}
-          <div className="w-1/2 h-full rounded-[2rem] overflow-hidden">
-            <img 
-              src="https://www.hhrinstitute.org/wp-content/uploads/Research.jpeg" 
-              alt="..."
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Cột phải: vuông + chữ nhật nhỏ */}
-          <div className="w-1/2 h-full flex flex-col gap-4">
-        
-            {/* Hình vuông */}
-            <div className="w-full aspect-square rounded-[2rem] overflow-hidden">
-              <img 
-                src="https://d2csxpduxe849s.cloudfront.net/media/E32629C6-9347-4F84-81FEAEF7BFA342B3/D02F34FC-C7D7-469D-B131BED737B5764F/E93DB082-5897-4FA3-AF9CAA63054BC69C/WebsiteJpg_XL-FMEDT_Main%20Visual_Purple_Website.jpg" 
-                alt="..."
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-          {/* Chữ nhật nhỏ bên dưới */}
-            <div className="w-full flex-1 rounded-[2rem] overflow-hidden">
-              <img 
-                src="https://api.brusselstimes.com/wp-content/uploads/2020/11/nonim11127shutterstock_280921640.jpg" 
-                alt="..."
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-          </div>
-        </div>
-
-        {/* Nửa phải - Text */}
-        <div className="w-1/2 flex items-center justify-center px-16">
-          <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part VII</span>
-            <h3 className="text-4xl font-black mb-6">The stories Title 7</h3>
-            <p className="text-slate-400 leading-relaxed italic">
-              The stories context 7
-            </p>
-          </div>
-        </div>
-
-        </div>
-      </section>
-{/* Slide 8 */}
-      <section 
-        ref={(el) => (sectionsRef.current[9] = el)} 
-        className="h-screen flex items-center"
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
-    
-        {/* Nửa trái - Text */}
-        <div className="w-1/2 flex items-center justify-center px-16">
-          <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part VIII</span>
-            <h3 className="text-4xl font-black mb-6">The stories Title 8</h3>
-            <p className="text-slate-400 leading-relaxed italic">
-              The stories context 8
-            </p>
-          </div>
-        </div>
-
-        {/* Nửa phải - 2 ảnh xếp dọc */}
-        <div className="w-1/2 h-[80vh] pr-8 flex flex-col gap-4">
-      
-      {/* Chữ nhật trên */}
-      <div className="w-full flex-1 rounded-[2rem] overflow-hidden">
-        <img 
-          src="https://study.com/cimages/videopreview/videopreview-full/the-application-of-physics-in-medicine_177033.jpg" 
-          alt="..."
-          className="w-full h-full object-cover"
-        />
-      </div>
-
-      {/* Chữ nhật dưới */}
-      <div className="w-full flex-1 rounded-[2rem] overflow-hidden">
-        <img 
-          src="https://www.ictp.it/sites/default/files/inline-images/IMG-20220901-WA0004-exp.jpg" 
-          alt="..."
-          className="w-full h-full object-cover"
-        />
-      </div>
-
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
     </div>
+
+    {/* Bubble chat đè lên góc trái */}
+    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+                    bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
+                    px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 9} />
+    </div>
+
+  </div>
+</section>
+
+{/*Slide 8*/}
+      <section 
+  ref={(el) => (sectionsRef.current[10] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6 -translate-y-10"  
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 3: Chapter 3 Title
+  </p>
+
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
+    
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Gemini_Generated_Image_j9jn55j9jn55j9jn_wiiina" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
+    </div>
+
+{/* Bubble chat đè lên góc phải */}
+<div className="absolute right-0 translate-x-1/2 top-9/10 -translate-y-1/2 
+                bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
+                px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+  <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 10} />
+</div>
 
   </div>
 </section>
 
 {/* Slide 9 */}
       <section 
-        ref={(el) => (sectionsRef.current[10] = el)} 
-        className="h-screen flex items-center"
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
+  ref={(el) => (sectionsRef.current[11] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6"
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 3: chapter 3  title
+  </p>
 
-        {/* Nửa trái - 2 ảnh xếp dọc */}
-        <div className="w-1/2 h-[80vh] pl-8 flex flex-col gap-4">
-      
-          {/* Chữ nhật trên */}
-          <div className="w-full flex-1 rounded-[2rem] overflow-hidden">
-            <img 
-              src="https://www.news-medical.net/images/Article_Images/ImageForArticle_22389_16499534671669840.jpg" 
-              alt="..."
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-      {/* Chữ nhật dưới */}
-      <div className="w-full flex-1 rounded-[2rem] overflow-hidden">
-        <img 
-          src="https://www.news-medical.net/images/Article_Images/ImageForArticle_22389_16499534671669840.jpg" 
-          alt="..."
-          className="w-full h-full object-cover"
-        />
-      </div>
-
-    </div>
-
-    {/* Nửa phải - Text */}
-    <div className="w-1/2 flex items-center justify-center px-16">
-      <div>
-        <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part IX</span>
-        <h3 className="text-4xl font-black mb-6">The stories Title 9</h3>
-        <p className="text-slate-400 leading-relaxed italic">
-          The stories context 9
-        </p>
-      </div>
-    </div>
-
-  </div>
-      </section>
-
-{/* Slide 10 */}
-      <section 
-          ref={(el) => (sectionsRef.current[11] = el)} 
-          className="h-screen flex items-center"
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
     
-        {/* Nửa trái - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pl-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
-            <img 
-              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
-              alt="..."
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
+    </div>
 
-    {/* Nửa phải - Text */}
-    <div className="w-1/2 flex items-center justify-center px-16">
-      <div>
-        <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part X</span>
-        <h3 className="text-4xl font-black mb-6">The stories Title 10</h3>
-        <p className="text-slate-400 leading-relaxed italic">
-          The stories context 10
-        </p>
-      </div>
+    {/* Bubble chat đè lên góc trái */}
+    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+                    bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
+                    px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 11} />
     </div>
 
   </div>
 </section>
-{/* Slide 11 */}
-      <section 
-          ref={(el) => (sectionsRef.current[12] = el)} 
-          className="h-screen flex items-center"  
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
-    
-        {/* Nửa trái - Text */}
-        <div className="w-1/2 flex items-center justify-center px-16">
-          <div>
-            <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part XI</span>
-              <h3 className="text-4xl font-black mb-6">The stories Title 11</h3>
-                <p className="text-slate-400 leading-relaxed italic">
-                  The stories context 11
-                </p>
-          </div>
-        </div>
 
-        {/* Nửa phải - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pr-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
-            <img 
-              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
-              alt="..."
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
-      </section>
+{/* Slide 10 */}
+      <section 
+  ref={(el) => (sectionsRef.current[12] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6"
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 4: chapter 4 title
+  </p>
+
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
+    
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
+    </div>
+
+    {/* Bubble chat đè lên góc trái */}
+    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+                    bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
+                    px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 12} />
+    </div>
+
+  </div>
+</section>
+
+{/*Slide 11*/}
+      <section 
+  ref={(el) => (sectionsRef.current[13] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6 -translate-y-10"  
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 4: chapter 4 title
+  </p>
+
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
+    
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Gemini_Generated_Image_j9jn55j9jn55j9jn_wiiina" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
+    </div>
+
+{/* Bubble chat đè lên góc phải */}
+<div className="absolute right-0 translate-x-1/2 top-9/10 -translate-y-1/2 
+                bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
+                px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+  <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 13} />
+</div>
+
+  </div>
+</section>
+
 {/* Slide 12 */}
-     <section 
-        ref={(el) => (sectionsRef.current[13] = el)} 
-        className="h-screen flex items-center"
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
-    
-        {/* Nửa trái - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pl-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
-            <img 
-              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
-              alt="..."
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
+      <section 
+  ref={(el) => (sectionsRef.current[14] = el)} 
+  className="h-screen flex flex-col items-center justify-center gap-6"
+>       
+  {/* Chapter title */}
+  <p className="text-white font-serif italic text-3xl tracking-widest">
+    Chapter 4: chapter 4 title
+  </p>
 
-    {/* Nửa phải - Text */}
-    <div className="w-1/2 flex items-center justify-center px-16">
-      <div>
-        <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part XII</span>
-        <h3 className="text-4xl font-black mb-6">The stories Title 12</h3>
-        <p className="text-slate-400 leading-relaxed italic">
-          The stories context 12
-        </p>
-      </div>
+  {/* Ảnh + bubble chat */}
+  <div className="relative w-4/6">
+    
+    {/* Ảnh lớn */}
+    <div className="rounded-[3rem] overflow-hidden">
+      <img 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        alt="..."
+        className="w-full h-auto object-contain"
+      />
+    </div>
+
+    {/* Bubble chat đè lên góc trái */}
+    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+                    bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
+                    px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
+      <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 14} />
     </div>
 
   </div>
-      </section>
-{/* Slide 13 */}
-      <section 
-          ref={(el) => (sectionsRef.current[14] = el)} 
-          className="h-screen flex items-center"  
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
-    
-          {/* Nửa trái - Text */}
-          <div className="w-1/2 flex items-center justify-center px-16">
-            <div>
-              <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part XIII</span>
-                <h3 className="text-4xl font-black mb-6">The stories Title 13</h3>
-                  <p className="text-slate-400 leading-relaxed italic">
-                    The stories context 13
-                  </p>
-            </div>
-          </div>
+</section>
 
-        {/* Nửa phải - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pr-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
-            <img 
-              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
-              alt="..."
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
-      </section>
-{/* Step 14 */}
-      <section 
-        ref={(el) => (sectionsRef.current[15] = el)} 
-        className="h-screen flex items-center"  
-      >       
-        <div className="relative flex flex-row w-full h-full items-center">
-    
-        {/* Nửa trái - Ảnh sát mép */}
-        <div className="w-1/2 h-[80vh] pl-8">
-          <div className="rounded-[3rem] overflow-hidden w-full h-full">
-            <img 
-              src="https://cmed.vn/wp-content/uploads/2024/11/medicine-doctor-stethoscope-using-tablet-with-icon-medical-network-connection-virtual-modern-medical-technology-concept.jpg" 
-              alt="..."
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-
-    {/* Nửa phải - Text */}
-    <div className="w-1/2 flex items-center justify-center px-16">
-      <div>
-        <span className="text-sky-400 font-serif italic text-3xl mb-4 block">Part XIV</span>
-        <h3 className="text-4xl font-black mb-6">The stories Title 14</h3>
-        <p className="text-slate-400 leading-relaxed italic">
-          The stories context 14
-        </p>
-      </div>
-    </div>
-
-  </div>
-      </section >
 {/* Final Call to Action */}
             {/* Nút điều hướng */}
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex flex-row gap-4 z-50">
@@ -679,7 +589,7 @@ export default function Journey() {
   {/* Up */}
   <button
     onClick={handlePrev}
-    className="w-12 h-12 rounded-full bg-slate-900 border border-sky-500 flex items-center justify-center hover:scale-110 transition"
+    className="w-10 h-10 rounded-full bg-slate-900 border border-sky-500 flex items-center justify-center hover:scale-110 transition"
   >
     <ArrowUp className="text-sky-500" />
   </button>
@@ -687,7 +597,7 @@ export default function Journey() {
   {/* Down */}
   <button
     onClick={handleNext}
-    className="w-12 h-12 rounded-full bg-slate-900 border border-sky-500 flex items-center justify-center hover:scale-110 transition"
+    className="w-10 h-10 rounded-full bg-slate-900 border border-sky-500 flex items-center justify-center hover:scale-110 transition"
   >
     <ArrowDown className="text-sky-500" />
   </button>

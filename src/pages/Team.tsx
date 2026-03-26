@@ -31,7 +31,7 @@ function ZoomImage() {
       }}
     >
       <img
-        src="https://i.postimg.cc/d1XC39Qy/display.png"
+        src="https://res.cloudinary.com/dbife6uva/image/upload/v1774560264/display_vgq0j0.jpg"
         className="w-full h-auto transition-transform duration-500 ease-out"
         style={{
           transform: zoom ? `scale(3.5)` : `scale(1)`,

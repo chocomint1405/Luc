@@ -60,12 +60,86 @@ function ChatTyper({ text, isVisible }) {
 
   return <span>{displayed}</span>;
 }
+function InfoModal({ isOpen, onClose, children }) {
+  if (!isOpen) return null;
 
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center">
+      
+      {/* nền mờ */}
+      <div 
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* khung modal */}
+      <div className="relative bg-white text-black rounded-3xl p-8 w-[90%] max-w-[1000px] max-h-[80vh] overflow-y-auto shadow-2xl z-10">
+        {children}
+      </div>
+
+    </div>
+  );
+}
 export default function Journey() {
   const sectionsRef = useRef([]);
   const [current, setCurrent] = useState(0);
   const [chapterVisible, setChapterVisible] = useState(false);
   const [chapter2Visible, setChapter2Visible] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
+  const audioRef = useRef(null);
+
+useEffect(() => {
+  if (!audioRef.current) return;
+
+  // reset audio cũ
+  audioRef.current.pause();
+  audioRef.current.currentTime = 0;
+
+  if (current === 2) {
+    audioRef.current.src = "/audio/1.mp3";
+  }
+    else if (current === 3) {
+    audioRef.current.src = "/audio/2.mp3";
+  }  
+  else if (current === 4) {
+    audioRef.current.src = "/audio/slide4.mp3";
+  } 
+  else if (current === 5) {
+    audioRef.current.src = "/audio/slide5.mp3";
+  } 
+    else if (current === 6) {
+    audioRef.current.src = "/audio/slide5.mp3";
+  } 
+    else if (current === 7) {
+    audioRef.current.src = "/audio/slide5.mp3";
+  } 
+    else if (current === 8) {
+    audioRef.current.src = "/audio/slide5.mp3";
+  } 
+    else if (current === 9) {
+    audioRef.current.src = "/audio/slide5.mp3";
+  } 
+    else if (current === 10) {
+    audioRef.current.src = "/audio/slide5.mp3";
+  } 
+    else if (current === 11) {
+    audioRef.current.src = "/audio/slide5.mp3";
+  } 
+    else if (current === 12) {
+    audioRef.current.src = "/audio/slide5.mp3";
+  } 
+    else if (current === 13) {
+    audioRef.current.src = "/audio/slide5.mp3";
+  } 
+    else if (current === 14) {
+    audioRef.current.src = "/audio/slide5.mp3";
+  } 
+  else {
+    return; // không có audio thì thôi
+  }
+
+  audioRef.current.play().catch(() => {});
+}, [current]);
 
   const scrollToSection = (index) => {
   if (index < 0 || index >= sectionsRef.current.length) return;
@@ -194,18 +268,47 @@ export default function Journey() {
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
+<button
+  onClick={() => setActiveModal({
+    title: "Slide 1",
+    content: (
+      <div className="space-y-4 text-justify leading-relaxed">
+        <p>
+          The atomic nucleus is a very small central region that contains nearly all of an atom’s mass. 
+          It consists of two fundamental particles: positively charged protons and electrically neutral neutrons.
+        </p>
+
+        <p>
+          Not all nuclei are stable. Nuclei that are excessively proton-rich, neutron-rich, or very heavy are typically unstable 
+          and undergo spontaneous radioactive decay in order to achieve a more stable configuration. The most common types of decay 
+          include alpha, beta, and gamma decay. These are natural processes; rather than indicating a “defective” nucleus, they reflect 
+          a quantum system transitioning to a lower-energy state.
+        </p>
+
+        <p>
+          In modern physics, the nucleus is a critically important subject of study because it is closely related to nuclear energy, 
+          nuclear medicine, isotope-based archaeology, stellar astrophysics and supernovae, as well as the fundamental structure of matter. 
+          If the atom is considered a “house,” then the nucleus can be regarded as its “heart.”
+        </p>
+      </div>
+    )
+  })}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:scale-125 transition z-20"
+>
+  i
+</button>
     
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Gemini_Generated_Image_j9jn55j9jn55j9jn_wiiina" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Gemini_Generated_Image_gwrx65gwrx65gwrx_eyo7xh" 
         alt="..."
         className="w-full h-auto object-contain"
       />
     </div>
 
 {/* Bubble chat đè lên góc phải */}
-<div className="absolute right-0 translate-x-1/2 top-9/10 -translate-y-1/2 
+<div className="absolute right-0 translate-x-1/2 top-3/10 -translate-y-1/2 
                 bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
                 px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
   <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 2} />
@@ -230,14 +333,14 @@ export default function Journey() {
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/2_qyzwvn" 
         alt="..."
         className="w-full h-auto object-contain"
       />
     </div>
 
     {/* Bubble chat đè lên góc trái */}
-    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+    <div className="absolute left-0 -translate-x-1/2 top-2/10 -translate-y-1/2 
                     bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
                     px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
       <ChatTyper text="Nội dung ngắn gọn slide 2" isVisible={current === 3} />
@@ -262,14 +365,14 @@ export default function Journey() {
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Gemini_Generated_Image_j9jn55j9jn55j9jn_wiiina" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/3_urko2h" 
         alt="..."
         className="w-full h-auto object-contain"
       />
     </div>
 
 {/* Bubble chat đè lên góc phải */}
-<div className="absolute right-0 translate-x-1/2 top-9/10 -translate-y-1/2 
+<div className="absolute right-0 translate-x-1/2 top-2/10 -translate-y-1/2 
                 bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
                 px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
   <ChatTyper text="Nuclear Tracer is more useful than you think !!!" isVisible={current === 4} />
@@ -298,6 +401,7 @@ export default function Journey() {
       <section 
   ref={(el) => (sectionsRef.current[6] = el)} 
   className="h-screen flex flex-col items-center justify-center gap-6"
+  
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
@@ -306,18 +410,90 @@ export default function Journey() {
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
+<button
+onClick={() => setActiveModal({
+  title: "Slide 4",
+  content: (
+  <div className="space-y-5 text-justify leading-relaxed">
+
+    {/* Ảnh */}
+    <div className="text-center">
+      <img
+        src="https://assets.onestopndt.com/p/uploads/text-editor-images/RadiographicTestingImage.png"
+        className="w-3/4 mx-auto rounded-xl shadow-lg"
+      />
+    </div>
+
+    {/* 🔥 PHẦN MỚI */}
+    <div className="space-y-3">
+      <h3 className="font-bold text-xl text-sky-600">
+        Radiographic Imaging & Measurement
+      </h3>
+
+      <p>
+        Gamma rays or X-rays are used to inspect welds 
+        and internal metal structures without causing damage to the material.
+      </p>
+
+      <h3 className="font-bold text-xl text-sky-600">
+        Thickness and density measurement
+      </h3>
+
+      <p>
+        Beta or gamma radiation is employed 
+        to accurately measure the thickness of materials such as metal sheets, paper, and plastics.
+      </p>
+
+      <p>
+        Principle: Based on the attenuation of radiation as it passes through matter.
+      </p>
+
+      <h3 className="font-bold text-xl text-sky-600">
+        Food irradiation
+      </h3>
+
+      <p>
+        Used to delay spoilage and eliminate microorganisms without making the food itself radioactive.
+      </p>
+
+      <h3 className="font-bold text-xl text-sky-600">
+        Mutation breeding
+      </h3>
+
+      <p>
+      Radiation is used to induce mutations, followed by selection of plant varieties with improved traits (e.g., higher yield, drought resistance).
+      </p>
+
+            <h3 className="font-bold text-xl text-sky-600">
+        Sterile Insect Technique (SIT)
+      </h3>
+
+      <p>
+      Radiation is applied to sterilize insects, rendering them incapable of reproduction, thereby helping to control pest populations.
+      </p>
+
+
+    </div>
+
+  </div>
+)
+})}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform transition-transform duration-200 ease-out hover:scale-125 active:scale-95 hover:shadow-xl z-20"
+>
+  i
+</button>
     
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/4_hcoecv" 
         alt="..."
         className="w-full h-auto object-contain"
       />
     </div>
 
     {/* Bubble chat đè lên góc trái */}
-    <div className="absolute left-0 -translate-x-1/2 top-9/10 -translate-y-1/2 
+    <div className="absolute left-0 -translate-x-1/2 top-2/10 -translate-y-1/2 
                     bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-br-sm 
                     px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
       <ChatTyper text="Nội dung ngắn gọn slide 4" isVisible={current === 6} />
@@ -338,11 +514,50 @@ export default function Journey() {
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
+  <button
+onClick={() => setActiveModal({
+  title: "Slide 5",
+  content: (
+  <div className="space-y-5 text-justify leading-relaxed">
+
+    {/* Ảnh */}
+    <div className="text-center">
+      <img
+        src="https://res.cloudinary.com/dkpt2do8f/image/upload/f_auto,q_auto/ChatGPT_Image_23_24_44_26_thg_3_2026_yhwccy"
+        className="w-3/4 mx-auto rounded-xl shadow-lg"
+      />
+    </div>
+
+    {/* 🔥 PHẦN MỚI */}
+    <div className="space-y-3">
+
+      <p>
+      In a nuclear reactor, the neutron source originates from the fission of Uranium-235. When a U-235 nucleus absorbs a thermal neutron, it becomes unstable and undergoes fission into two lighter fragments, releasing energy and approximately 2 to 3 new neutrons.
+      </p>
+
+      <p>
+      These newly produced neutrons go on to induce further fission reactions, forming a chain reaction. The sustainability of this chain reaction is characterized by the neutron multiplication factor, k. If k is less than 1, the reaction will gradually die out. If k is greater than 1, the reaction increases rapidly and may become uncontrolled. Therefore, in a reactor, k is carefully regulated to be approximately equal to 1 in order to maintain a steady-state (critical) condition
+      </p>
+
+      <p>
+        Once a stable neutron flux is established, the target material to be irradiated is placed in a region of high neutron flux. There, neutrons—especially thermal neutrons—are absorbed by nuclei in the sample through neutron capture reactions, denoted as (n, γ). Following this process, the nucleus is transformed into a new isotope, often a radioactive one, and emits gamma radiation.
+      </p>
+
+    </div>
+
+  </div>
+)
+})}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform transition-transform duration-200 ease-out hover:scale-125 active:scale-95 hover:shadow-xl z-20"
+>
+  i
+</button>
+
     
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Gemini_Generated_Image_j9jn55j9jn55j9jn_wiiina" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/5_rr5ee0" 
         alt="..."
         className="w-full h-auto object-contain"
       />
@@ -370,11 +585,31 @@ export default function Journey() {
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
+    <button
+    onClick={() => setActiveModal({
+      title: "Slide 5",
+      content: (
+        <div className="space-y-4">
+          <p>Đây là video minh hoạ:</p>
+
+          <iframe
+            className="w-full aspect-video rounded-xl"
+            src="https://www.youtube.com/embed/6BxyqFK2KRI"
+            title="YouTube video"
+            allowFullScreen
+          />
+        </div>
+      )
+    })}
+    className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform transition-transform duration-200 ease-out hover:scale-125 active:scale-95 hover:shadow-xl z-20"
+  >
+    i
+  </button>
     
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
-        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/Image2_aciqex" 
+        src="https://res.cloudinary.com/dutjtmgbp/image/upload/f_auto,q_auto/6_ivjhsa" 
         alt="..."
         className="w-full h-auto object-contain"
       />
@@ -402,6 +637,37 @@ export default function Journey() {
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
+  <button
+onClick={() => setActiveModal({
+  title: "Slide 7",
+  content: (
+  <div className="space-y-5 text-justify leading-relaxed">
+
+
+    {/* 🔥 PHẦN MỚI */}
+    <div className="space-y-3">
+
+      <p>
+      Radiopharmaceuticals are compounds that contain radioactive isotopes and are widely used in the diagnosis and treatment of diseases. Due to their specific properties, the radionuclides used in radiopharmaceuticals are required to have short half-lives. This creates challenges in their storage and availability. To address this issue, the radionuclide generator—a device that provides a continuous supply of short-lived radioactive isotopes—was developed
+      </p>
+
+      <p>
+      In nuclear medicine, a “generator” refers to a closed system containing a parent radionuclide and its daughter radionuclide. The parent nucleus undergoes natural radioactive decay to produce a useful daughter nucleus, which is periodically separated for clinical use. From a nuclear physics perspective, this can be considered an “isotope production source” based on radioactive decay, rather than a nuclear reactor or an accelerator.
+      </p>
+
+      <p>
+        The most well-known example is the ⁹⁹Mo/⁹⁹ᵐTc generator: ⁹⁹Mo is the parent radionuclide, which undergoes beta decay to produce ⁹⁹ᵐTc. The Tc-99m is then “eluted” from the generator column using a saline solution for use in diagnostic imaging. This is an essential source of Tc-99m because the daughter isotope has a short half-life and is highly suitable for imaging applications.
+      </p>
+
+    </div>
+
+  </div>
+)
+})}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform transition-transform duration-200 ease-out hover:scale-125 active:scale-95 hover:shadow-xl z-20"
+>
+  i
+</button>
     
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
@@ -466,6 +732,33 @@ export default function Journey() {
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
+  <button
+onClick={() => setActiveModal({
+  title: "Slide 9",
+  content: (
+  <div className="space-y-5 text-justify leading-relaxed">
+
+
+    {/* 🔥 PHẦN MỚI */}
+    <div className="space-y-3">
+
+      <p>
+        Utilizes radiopharmaceuticals (radiotracers) to investigate physiological, biochemical, and molecular processes in vivo. Provides functional information, often preceding structural changes, and complements anatomical imaging.
+      </p>
+
+      <p>
+        Encompasses radionuclide imaging techniques (planar scintigraphy, SPECT, PET/CT,...) and quantitative functional studies. Includes both in vivo imaging and in vitro assays (e.g., radioimmunoassay) for precise measurement of biological parameters. Plays a central role in disease detection, staging, and therapy monitoring.
+      </p>
+
+    </div>
+
+  </div>
+)
+})}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform transition-transform duration-200 ease-out hover:scale-125 active:scale-95 hover:shadow-xl z-20"
+>
+  i
+</button>
     
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
@@ -498,6 +791,33 @@ export default function Journey() {
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
+  <button
+onClick={() => setActiveModal({
+  title: "Slide 9",
+  content: (
+  <div className="space-y-5 text-justify leading-relaxed">
+
+
+    {/* 🔥 PHẦN MỚI */}
+    <div className="space-y-3">
+
+      <p>
+       Employs radiopharmaceuticals to deliver targeted ionizing radiation for therapeutic purposes. Based on selective uptake and retention in pathological tissues, enabling molecular-level treatment. Includes systemic radionuclide therapy, brachytherapy, and integration with external beam approaches. 
+      </p>
+
+      <p>
+       Widely applied in oncology, endocrinology, and other disorders with specific biological targets. Supports theranostic strategies by combining diagnostic imaging and therapy using related agents. Aims to maximize therapeutic efficacy while minimizing toxicity to normal tissues. 
+      </p>
+
+    </div>
+
+  </div>
+)
+})}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform transition-transform duration-200 ease-out hover:scale-125 active:scale-95 hover:shadow-xl z-20"
+>
+  i
+</button>
     
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
@@ -584,8 +904,20 @@ export default function Journey() {
 
 {/* Final Call to Action */}
             {/* Nút điều hướng */}
+<InfoModal 
+  isOpen={!!activeModal} 
+  onClose={() => setActiveModal(null)}
+>
+  <h2 className="text-2xl font-bold mb-4">
+    {activeModal?.title}
+  </h2>
+<div className="text-lg">
+  {activeModal?.content}
+</div>
+</InfoModal>
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex flex-row gap-4 z-50">
   
+  <audio ref={audioRef} />
   {/* Up */}
   <button
     onClick={handlePrev}

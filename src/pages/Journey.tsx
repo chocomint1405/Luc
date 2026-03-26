@@ -142,7 +142,7 @@ useEffect(() => {
   else if (current === 17) {
     audioRef.current.src = "/audio/12.mp3";
   } 
-   else if (current === 17) {
+   else if (current === 18) {
     audioRef.current.src = "/audio/13.mp3";
   } 
   else {
@@ -910,6 +910,7 @@ onClick={() => setActiveModal({
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
+  
     
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
@@ -943,7 +944,27 @@ onClick={() => setActiveModal({
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
-    
+  <button
+  onClick={() => setActiveModal({
+    title: "An introduction about nuclear",
+    content: (
+      <div className="space-y-4 text-justify leading-relaxed">
+        <p>
+          Segmentation in PET/SPECT imaging refers to the process of delineating regions of interest (ROIs/VOIs), such as tumors, organs, or areas of abnormal tracer uptake, in order to transform functional images into quantitative and clinically meaningful data. In PET, segmentation is particularly critical because it directly affects quantitative metrics such as standardized uptake value (SUV), as well as diagnosis, treatment response assessment, and therapy planning. In SPECT, segmentation plays a key role in dosimetry, where accurate estimation of volume and activity within target regions is essential for reliable absorbed dose calculations. However, both PET and SPECT imaging present significant challenges for segmentation, including high noise levels, low spatial resolution, partial volume effects, heterogeneous lesion characteristics, and strong dependence on manual delineation by experts. As a result, manual segmentation is time-consuming and subject to inter-observer variability, while automated and semi-automated methods are being developed to improve reproducibility and accuracy.
+        </p>
+
+        <p>
+The emergence of artificial intelligence, particularly deep learning, has significantly advanced segmentation in nuclear medicine. In PET imaging, AI enables automated and consistent lesion delineation, improving detection and quantitative analysis while integrating into the full imaging pipeline from reconstruction to clinical interpretation. In SPECT imaging, studies have shown that AI-based segmentation can improve the estimation of organ volumes and activity for dosimetry, especially in radionuclide therapy such as ^177Lu-DOTATATE. Furthermore, multimodal approaches that incorporate PET information to assist CT-based segmentation have demonstrated improved performance and efficiency. Overall, AI-based segmentation transforms PET/SPECT images from raw functional data into well-defined quantitative regions, thereby enhancing diagnostic accuracy, treatment planning, and personalized medicine.
+        </p>
+
+      </div>
+    )
+  })}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:scale-125 transition z-20"
+>
+  i
+</button>
+
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
@@ -954,10 +975,10 @@ onClick={() => setActiveModal({
     </div>
 
 {/* Bubble chat đè lên góc phải */}
-<div className="absolute right-0 translate-x-1/2 top-2/10 -translate-y-1/2 
+<div className="absolute right-0 translate-x-1/2 top-4/10 -translate-y-1/2 
                 bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
                 px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-  <ChatTyper text="My applications in medicine contribute to improving human health." isVisible={current === 16} />
+  <ChatTyper text="AI, particularly deep learning, enables automated and consistent segmentation, improving accuracy, efficiency, and quantitative analysis" isVisible={current === 16} />
 </div>
 
   </div>
@@ -975,7 +996,33 @@ onClick={() => setActiveModal({
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
-    
+  <button
+  onClick={() => setActiveModal({
+    title: "An introduction about nuclear",
+    content: (
+      <div className="space-y-4 text-justify leading-relaxed">
+        <p>
+In nuclear medicine, images are not just pictures of the body—they reflect functional processes occurring inside the body. However, PET and SPECT images are often noisy due to limited signal, and increasing the radiotracer dose to improve image quality is not safe for patients.        </p>
+
+        <p>
+AI has emerged to address this challenge. It can perform denoising to reduce noise and improve image clarity, as well as reconstruction to generate higher-quality images from raw data. In addition, AI can be combined with traditional reconstruction methods to maintain accuracy while enhancing image quality.        </p>
+
+      <p>
+As a result, images become not only clearer but also preserve important details, allowing physicians to detect lesions more easily.
+More importantly, AI enables lower radiation doses or shorter scan times while still maintaining diagnostic quality
+Therefore, AI does not simply make images look better—it makes diagnosis more accurate, faster, and safer.
+That is why AI can be considered a ‘smart lens’ in nuclear medicine.
+    </p>
+
+      
+      </div>
+    )
+  })}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:scale-125 transition z-20"
+>
+  i
+</button> 
+
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
       <img 
@@ -985,10 +1032,10 @@ onClick={() => setActiveModal({
     </div>
 
 {/* Bubble chat đè lên góc phải */}
-<div className="absolute right-0 translate-x-1/2 top-2/10 -translate-y-1/2 
+<div className="absolute right-0 translate-x-1/2 top-3/10 -translate-y-1/2 
                 bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
                 px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-  <ChatTyper text="My applications in medicine contribute to improving human health." isVisible={current === 17} />
+  <ChatTyper text="AI acting as a “smart lens” in nuclear medicine." isVisible={current === 17} />
 </div>
 
   </div>
@@ -1006,6 +1053,34 @@ onClick={() => setActiveModal({
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
+    <button
+  onClick={() => setActiveModal({
+    title: "An introduction about nuclear",
+    content: (
+      <div className="space-y-4 text-justify leading-relaxed">
+        <p>
+          Beyond imaging and data analysis, artificial intelligence also plays a critical role in optimizing the logistics of radiopharmaceutical supply in nuclear medicine. Radioisotopes are inherently time-sensitive due to their radioactive decay, meaning their clinical effectiveness decreases rapidly over time. Therefore, efficient production, distribution, and delivery are essential to ensure their usability upon arrival at healthcare facilities.        
+        </p>
+
+        <p>
+          AI-driven systems can support the development of an intelligent supply network by forecasting demand across hospitals, optimizing production schedules at cyclotrons, and determining the most efficient transportation routes. By incorporating factors such as radioactive decay kinetics, traffic conditions, and clinical scheduling, AI can ensure that radiopharmaceuticals are delivered at the right time, to the right location, with sufficient remaining activity for clinical use.
+        </p>
+
+        <p>
+Furthermore, such systems can minimize resource wastage, improve coordination between production and clinical sites, and enhance the overall efficiency and reliability of nuclear medicine services
+        </p>
+        <p>
+          In this context, AI not only improves diagnostic and therapeutic processes but also enables a more integrated, responsive, and sustainable healthcare infrastructure for nuclear medicine.
+        </p>
+
+      
+      </div>
+    )
+  })}
+  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:scale-125 transition z-20"
+>
+  i
+</button> 
     
     {/* Ảnh lớn */}
     <div className="rounded-[3rem] overflow-hidden">
@@ -1017,10 +1092,10 @@ onClick={() => setActiveModal({
     </div>
 
 {/* Bubble chat đè lên góc phải */}
-<div className="absolute right-0 translate-x-1/2 top-2/10 -translate-y-1/2 
+<div className="absolute right-0 translate-x-1/2 top-5/10 -translate-y-1/2 
                 bg-gradient-to-br from-sky-500 to-blue-600 text-white rounded-3xl rounded-bl-sm 
                 px-5 py-4 shadow-2xl w-[250px] min-h-[0px] text-lg leading-relaxed">
-  <ChatTyper text="My applications in medicine contribute to improving human health." isVisible={current === 18} />
+  <ChatTyper text=" AI ensures timely delivery with sufficient activity, while reducing waste and improving the overall efficiency and sustainability of nuclear medicine services" isVisible={current === 18} />
 </div>
 
   </div>

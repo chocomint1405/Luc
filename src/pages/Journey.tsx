@@ -231,7 +231,7 @@ else setChapter3Visible(false);
             transition={{ delay: 0.2 }}
             className="text-6xl md:text-8xl font-black italic tracking-tighter mb-8"
           >
-            THE STORIES <span className="text-sky-500">TITLE</span>
+            Nuclear Medicine:  <span className="text-sky-500">From Fear to the Future</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}
@@ -239,7 +239,7 @@ else setChapter3Visible(false);
             transition={{ delay: 0.4 }}
             className=" text-slate-400 max-w-xl mx-auto italic text-lg"
           >
-            "The Stories Context"
+    
           </motion.p>
 
         </div>
@@ -262,8 +262,8 @@ else setChapter3Visible(false);
 >
   <div className="text-center">
     <TypewriterText 
-  lines={["Chapter 1", "The Introduction"]} 
-  totalDuration={2000}
+  lines={["Chapter 1", "What Comes to Mind When We Think About Nuclear?"]} 
+  totalDuration={4000}
   isVisible={chapterVisible}
 />
   </div>
@@ -404,7 +404,7 @@ else setChapter3Visible(false);
   <div className="text-center">
   {/* Chapter 2 Intro */}
 <TypewriterText 
-  lines={["Chapter 2", "Chapter 2 title"]} 
+  lines={["Chapter 2", "Looking Beyond the Fear"]} 
   totalDuration={4000}
   isVisible={chapter2Visible}
 />
@@ -647,7 +647,7 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: The Future of Nuclear Medicine
+   Chapter 2: Looking Beyond the Fear
 
   </p>
 
@@ -711,7 +711,7 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: The Future of Nuclear Medicine
+    Chapter 2: Looking Beyond the Fear
 
   </p>
 
@@ -744,7 +744,7 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: The Future of Nuclear Medicine
+  Chapter 2: Looking Beyond the Fear
 
   </p>
 
@@ -804,7 +804,7 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: The Future of Nuclear Medicine
+   Chapter 2: Looking Beyond the Fear
 
   </p>
 
@@ -864,7 +864,7 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: The Future of Nuclear Medicine
+    Chapter 2: Looking Beyond the Fear
 
   </p>
 
@@ -897,8 +897,8 @@ onClick={() => setActiveModal({
 >
   <div className="text-center">
     <TypewriterText 
-      lines={["Chapter 3:", "The Conclusion"]} 
-      totalDuration={2000}
+      lines={["Chapter 3:", "The Future of Nuclear Medicine"]} 
+      totalDuration={3000}
       isVisible={chapter3Visible}
     />
   </div>

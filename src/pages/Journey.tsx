@@ -277,7 +277,7 @@ else setChapter3Visible(false);
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 1: The Introduction
+    Chapter 1: What Comes to Mind When We Think About Nuclear?
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -338,7 +338,7 @@ else setChapter3Visible(false);
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 1: The Introduction
+    Chapter 1: What Comes to Mind When We Think About Nuclear?
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -370,7 +370,7 @@ else setChapter3Visible(false);
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 1: The Introduction
+    Chapter 1: TWhat Comes to Mind When We Think About Nuclear?
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -419,8 +419,9 @@ else setChapter3Visible(false);
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 2: Title
+    Chapter 2: Looking Beyond the Fear
   </p>
+
 
   {/* Ảnh + bubble chat */}
   <div className="relative w-4/6">
@@ -523,7 +524,7 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 2: The Title
+    Chapter 2: Looking Beyond the Fear
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -594,7 +595,7 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 2: Title
+    Chapter 2: Looking Beyond the Fear
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -646,7 +647,8 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: Chapter 3 Title
+    Chapter 3: The Future of Nuclear Medicine
+
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -709,7 +711,8 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: Chapter 3 Title
+    Chapter 3: The Future of Nuclear Medicine
+
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -741,7 +744,8 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: chapter 3  title
+    Chapter 3: The Future of Nuclear Medicine
+
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -800,7 +804,8 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: chapter 3 title
+    Chapter 3: The Future of Nuclear Medicine
+
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -859,7 +864,8 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: chapter 3 title
+    Chapter 3: The Future of Nuclear Medicine
+
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -905,7 +911,8 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: chapter 3 title
+    Chapter 3: The Future of Nuclear Medicine
+
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -939,7 +946,8 @@ onClick={() => setActiveModal({
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: chapter 3 title
+    Chapter 3: The Future of Nuclear Medicine
+
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -991,7 +999,8 @@ The emergence of artificial intelligence, particularly deep learning, has signif
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: chapter 3 title
+    Chapter 3: The Future of Nuclear Medicine
+
   </p>
 
   {/* Ảnh + bubble chat */}
@@ -1048,7 +1057,8 @@ That is why AI can be considered a ‘smart lens’ in nuclear medicine.
 >       
   {/* Chapter title */}
   <p className="text-white font-serif italic text-3xl tracking-widest">
-    Chapter 3: chapter 3 title
+    Chapter 3: The Future of Nuclear Medicine
+
   </p>
 
   {/* Ảnh + bubble chat */}
